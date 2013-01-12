@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<entity name="Headline">
+
+    <descriptionLong>Lange Beschreibung</descriptionLong>
+
+    <descriptionShort>Kurzbeschreibung</descriptionShort>
+
+    <properties>
+        <property value="value1" key="key1"/>
+        <property value="value2" key="key2"/>
+    </properties>
+
+    <attributes>
+
+        <attribute name="id" primaryKey="true" nullable="false" notation="V_ID" fieldId="1">
+            <datatype type="decimal" precision="18" scale="0" defaultValue="0"/>
+            <descriptionLong>Lange Beschreibung</descriptionLong>
+            <descriptionShort>Kurzbeschreibung</descriptionShort>
+            <properties>
+                <property value="value1" key="key1"/>
+                <property value="value2" key="key2"/>
+            </properties>
+        </attribute>
+
+        <attribute name="todoId" primaryKey="false" nullable="false" notation="V_TODOID" fieldId="1">
+            <datatype type="decimal" precision="18" scale="0" defaultValue="0"/>
+            <descriptionLong>Lange Beschreibung</descriptionLong>
+            <descriptionShort>Kurzbeschreibung</descriptionShort>
+            <properties>
+                <property value="value1" key="key1"/>
+                <property value="value2" key="key2"/>
+            </properties>
+        </attribute>
+
+        <attribute name="dateCreated" primaryKey="false" nullable="false" notation="V_DATECREATED" fieldId="1">
+            <datatype type="datetime" defaultValue="01.01.1800"/>
+            <descriptionLong>Lange Beschreibung</descriptionLong>
+            <descriptionShort>Kurzbeschreibung</descriptionShort>
+            <properties>
+                <property value="value1" key="key1"/>
+                <property value="value2" key="key2"/>
+            </properties>
+        </attribute>
+
+        <attribute name="lastUpdated" primaryKey="false" nullable="true" notation="V_LASTUPDATED" fieldId="1">
+            <datatype type="datetime" defaultValue="null"/>
+            <descriptionLong>Lange Beschreibung</descriptionLong>
+            <descriptionShort>Kurzbeschreibung</descriptionShort>
+            <properties>
+                <property value="value1" key="key1"/>
+                <property value="value2" key="key2"/>
+            </properties>
+        </attribute>
+
+    </attributes>
+
+    <relationships>
+
+        <oneToMany targetEntity="TODO">
+            <joinColumn referencedColumnName="todoId" name="id"/>
+        </oneToMany>
+
+        <manyToOne targetEntity="TODO">
+            <joinColumn referencedColumnName="id" name="todoId"/>
+        </manyToOne>
+
+    </relationships>
+
+</entity>

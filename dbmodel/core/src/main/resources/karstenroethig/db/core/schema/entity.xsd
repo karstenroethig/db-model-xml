@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	
+	<!-- Entität (Root-Element) -->
+	<xsd:element name="entity">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="descriptionLong" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+				<xsd:element name="descriptionShort" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+				<xsd:element ref="properties" maxOccurs="1" minOccurs="0"/>
+				<xsd:element ref="attributes" maxOccurs="1" minOccurs="0"/>
+				<xsd:element ref="relationships" maxOccurs="1" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+			<xsd:attribute name="extends" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Liste von Attributen -->
+	<xsd:element name="attributes">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="attribute" maxOccurs="unbounded" minOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Attribut -->
+	<xsd:element name="attribute">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="datatype" maxOccurs="1" minOccurs="1"/>
+				<xsd:element name="descriptionLong" maxOccurs="1" minOccurs="1" type="xsd:string"/>
+				<xsd:element name="descriptionShort" maxOccurs="1" minOccurs="1" type="xsd:string"/>
+				<xsd:element ref="properties" maxOccurs="1" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+			<xsd:attribute name="primaryKey" type="xsd:boolean" use="optional"/>
+			<xsd:attribute name="nullable" type="xsd:boolean" use="optional"/>
+			<xsd:attribute name="fieldId" type="xsd:integer" use="required"/>
+			<xsd:attribute name="notation" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Datentyp -->
+	<xsd:element name="datatype">
+		<xsd:complexType>
+			<!-- Datentyp (decimal, char, varchar, int, datetime, date, timestamp, blob) -->
+			<xsd:attribute name="type" type="datatypeEnum" use="required"/>
+			<xsd:attribute name="defaultValue" type="xsd:string" use="optional"/>
+			<!-- decimal -> precision (Genauigkeit) -->
+			<xsd:attribute name="precision" type="xsd:integer" use="optional"/>
+			<!-- decimal -> scale (Dezimalstelle) -->
+			<xsd:attribute name="scale" type="xsd:integer" use="optional"/>
+			<!-- char | varchar -> length -->
+			<xsd:attribute name="length" type="xsd:integer" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Liste von Properties -->
+	<xsd:element name="properties">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="property" maxOccurs="unbounded" minOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Property -->
+	<xsd:element name="property">
+		<xsd:complexType>
+			<xsd:attribute name="key" type="xsd:string" use="required"/>
+			<xsd:attribute name="value" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Liste von Abhängigkeiten -->
+	<xsd:element name="relationships">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="oneToOne" maxOccurs="unbounded" minOccurs="0"/>
+				<xsd:element ref="oneToMany" maxOccurs="unbounded" minOccurs="0"/>
+				<xsd:element ref="manyToOne" maxOccurs="unbounded" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Kardinalität: 1:1 -->
+	<xsd:element name="oneToOne">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="joinColumn" maxOccurs="unbounded" minOccurs="1"/>
+			</xsd:sequence>
+			<xsd:attribute name="targetEntity" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Kardinalität: 1:n -->
+	<xsd:element name="oneToMany">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="joinColumn" maxOccurs="unbounded" minOccurs="1"/>
+			</xsd:sequence>
+			<xsd:attribute name="targetEntity" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Kardinalität: n:1 -->
+	<xsd:element name="manyToOne">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="joinColumn" maxOccurs="unbounded" minOccurs="1"/>
+			</xsd:sequence>
+			<xsd:attribute name="targetEntity" type="xsd:string" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Kardinalität: Join-Column -->
+	<xsd:element name="joinColumn">
+		<xsd:complexType>
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+			<xsd:attribute name="referencedColumnName" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- Types: Datentypen -->
+	<xsd:simpleType name="datatypeEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="decimal"/>
+			<xsd:enumeration value="char"/>
+			<xsd:enumeration value="varchar"/>
+			<xsd:enumeration value="int"/>
+			<xsd:enumeration value="datetime"/>
+			<xsd:enumeration value="date"/>
+			<xsd:enumeration value="timestamp"/>
+			<xsd:enumeration value="blob"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>

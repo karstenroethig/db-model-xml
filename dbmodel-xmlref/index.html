@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<title>XML-Reference</title>
+		<link rel="stylesheet" href="resources/style.css" type="text/css"/>
+	</head>
+	<body>
+		<h1>XML-Reference</h1>
+		<p>Allgemeine Beschreibung</p>
+		<h2>Benamung und Ablage von XML-Dateien</h2>
+		<p>Benamung und Ablage von XML-Dateien beschreiben</p>
+		<h2>XML-Elemente</h2>
+		<p><strong>The list of currently available tags:</strong></p>
+		<ul>
+			<li><a href="#tag-entity">entity</a></li>
+			<li><a href="#tag-attributes">attributes</a></li>
+		</ul>
+		<h3 id="tag-entity">entity</h3>
+		<p>Allgemeine Beschreibung für das Element</p>
+		<p><strong>Elemente</strong></p>
+		<table>
+			<thead>
+				<tr>
+					<th>Element Name</th>
+					<th>Required</th>
+					<th>Maximum</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><p>description</p></td>
+					<td><p> </p></td>
+					<td><p>1</p></td>
+					<td><p>Die Beschreibung der Entität.</p></td>
+				</tr>
+				<tr>
+					<td><p><a href="#tag-attributes">attributes</a></p></td>
+					<td><p><img src="resources/check.png"/></p></td>
+					<td><p>1</p></td>
+					<td>
+						<p>
+							A comma delimited list of either users or groups
+							<br/>
+							<img src="resources/information.png"/>
+							A comma delimited list of either users or groups
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td><p>relationships</p></td>
+					<td><p> </p></td>
+					<td><p>1</p></td>
+					<td><p>This defines the 'actor' type. Currently this field can contain either 'atlassian-user-role-actor' for users, or 'atlassian-group-role-actor' for groups.</p></td>
+				</tr>
+			</tbody>
+		</table>
+		<p><strong>Attribute</strong></p>
+		<table>
+			<thead>
+				<tr>
+					<th>Attribut Name</th>
+					<th>Type</th>
+					<th>Required</th>
+					<th>Default Value</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><p>projectroleid</p></td>
+					<td><p>int</p></td>
+					<td><p><img src="resources/check.png"/></p></td>
+					<td><p> </p></td>
+					<td><p>This is the id of the project role.</p></td>
+				</tr>
+				<tr>
+					<td><p>actors</p></td>
+					<td><p>string</p></td>
+					<td><p><img src="resources/check.png"/></p></td>
+					<td><p> </p></td>
+					<td>
+						<p>
+							A comma delimited list of either users or groups
+							<br/>
+							<img src="resources/information.png"/>
+							A comma delimited list of either users or groups
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td><p>actortype</p></td>
+					<td><p>string</p></td>
+					<td><p> </p></td>
+					<td><p> </p></td>
+					<td><p>This defines the 'actor' type. Currently this field can contain either 'atlassian-user-role-actor' for users, or 'atlassian-group-role-actor' for groups.</p></td>
+				</tr>
+				<tr>
+					<td><p>projectkey</p></td>
+					<td><p>string</p></td>
+					<td><p> </p></td>
+					<td><p> </p></td>
+					<td><p>This is the key of the project you wish to add users or groups to for the specified role.</p></td>
+				</tr>
+			</tbody>
+		</table>
+		<h4>Examples</h4>
+		<p><strong>Kurze Beschreibung des Beispiels</strong></p>
+		<div class="codePanel">
+				<div><code>&lt;JiraJelly xmlns:jira="jelly:com.atlassian.jira.jelly.JiraTagLib"&gt;</code></div>
+				<div><code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;jira:AddActorsToProjectRole projectroleid="1" actors="jira-administrators,jira-users" projectkey="MKY" actortype="atlassian-group-role-actor" /&gt;</code></div>
+				<div><code>&lt;/JiraJelly&gt;</code></div>
+		</div>
+		<h3 id="tag-attributes">attributes</h3>
+		<p>Allgemeine Beschreibung für das Element</p>
+		<p><strong>Elemente</strong></p>
+		<table>
+			<thead>
+				<tr>
+					<th>Element Name</th>
+					<th>Required</th>
+					<th>Maximum</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><p>description</p></td>
+					<td><p> </p></td>
+					<td><p>1</p></td>
+					<td><p>Die Beschreibung der Entität.</p></td>
+				</tr>
+				<tr>
+					<td><p>attributes</p></td>
+					<td><p><img src="resources/check.png"/></p></td>
+					<td><p>1</p></td>
+					<td>
+						<p>
+							A comma delimited list of either users or groups
+							<br/>
+							<img src="resources/information.png"/>
+							A comma delimited list of either users or groups
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td><p>relationships</p></td>
+					<td><p> </p></td>
+					<td><p>1</p></td>
+					<td><p>This defines the 'actor' type. Currently this field can contain either 'atlassian-user-role-actor' for users, or 'atlassian-group-role-actor' for groups.</p></td>
+				</tr>
+			</tbody>
+		</table>
+		<p><strong>Attribute</strong></p>
+		<table>
+			<thead>
+				<tr>
+					<th>Attribut Name</th>
+					<th>Type</th>
+					<th>Required</th>
+					<th>Default Value</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><p>projectroleid</p></td>
+					<td><p>int</p></td>
+					<td><p><img src="resources/check.png"/></p></td>
+					<td><p> </p></td>
+					<td><p>This is the id of the project role.</p></td>
+				</tr>
+				<tr>
+					<td><p>actors</p></td>
+					<td><p>string</p></td>
+					<td><p><img src="resources/check.png"/></p></td>
+					<td><p> </p></td>
+					<td>
+						<p>
+							A comma delimited list of either users or groups
+							<br/>
+							<img src="resources/information.png"/>
+							A comma delimited list of either users or groups
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td><p>actortype</p></td>
+					<td><p>string</p></td>
+					<td><p> </p></td>
+					<td><p> </p></td>
+					<td><p>This defines the 'actor' type. Currently this field can contain either 'atlassian-user-role-actor' for users, or 'atlassian-group-role-actor' for groups.</p></td>
+				</tr>
+				<tr>
+					<td><p>projectkey</p></td>
+					<td><p>string</p></td>
+					<td><p> </p></td>
+					<td><p> </p></td>
+					<td><p>This is the key of the project you wish to add users or groups to for the specified role.</p></td>
+				</tr>
+			</tbody>
+		</table>
+		<h4>Examples</h4>
+		<p><strong>Kurze Beschreibung des Beispiels</strong></p>
+		<div class="codePanel">
+				<div><code>&lt;JiraJelly xmlns:jira="jelly:com.atlassian.jira.jelly.JiraTagLib"&gt;</code></div>
+				<div><code>&nbsp;&nbsp;&nbsp;&nbsp;&lt;jira:AddActorsToProjectRole projectroleid="1" actors="jira-administrators,jira-users" projectkey="MKY" actortype="atlassian-group-role-actor" /&gt;</code></div>
+				<div><code>&lt;/JiraJelly&gt;</code></div>
+		</div>
+	</body>
+</html>

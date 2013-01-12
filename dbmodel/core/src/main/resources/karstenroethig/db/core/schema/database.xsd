@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<!-- Datenbank (Root-Element) -->
+	<xsd:element name="database">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="entities" maxOccurs="1" minOccurs="1"/>
+			</xsd:sequence>
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+			<xsd:attribute name="version" type="xsd:string" use="required"/>
+			<xsd:attribute name="createDate" type="xsd:string" use="optional"/>
+			<xsd:attribute name="svnRevision" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- Liste von Entitäten -->
+	<xsd:element name="entities">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="entity" maxOccurs="unbounded" minOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- Entität -->
+	<xsd:element name="entity">
+		<xsd:complexType>
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+			<xsd:attribute name="category" type="xsd:string" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>	
+
+</xsd:schema>
