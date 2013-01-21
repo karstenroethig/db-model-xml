@@ -120,9 +120,12 @@ public class Database {
 		entitiesByName.put( entity.getName(), entity );
 		
 		if( StringUtils.isNotBlank( category ) ) {
-			categories.add( category );
 			
 			if( categories.contains( category ) == false ) {
+				categories.add( category );
+			}
+			
+			if( entitiesByCategory.containsKey( category ) == false ) {
 				entitiesByCategory.put( category, new ArrayList<Entity>() );
 			}
 			

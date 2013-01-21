@@ -95,6 +95,15 @@ public class Attribute {
 	public Set<String> getPropertyKeys() {
 		return properties.keySet();
 	}
+	
+	public boolean hasProperty( String key ) {
+		
+		if( StringUtils.isBlank( key ) ) {
+			return false;
+		}
+		
+		return properties.containsKey( key );
+	}
 
 	public String getProperty( String key ) {
 		

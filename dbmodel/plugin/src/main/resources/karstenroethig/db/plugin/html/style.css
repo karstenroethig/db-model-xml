@@ -1,0 +1,108 @@
+body {
+	font-family: Verdana, Arial, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+.header {
+	font-size: 8pt;
+}
+
+.header td {
+	font-size: 8pt;
+	height: 25px;
+}
+
+.header1 td {
+	padding-left: 3px;
+	padding-right: 3px;
+	background-color: #355564;
+	vertical-align: top;
+	text-align: right;
+}
+
+.header1 div {
+	color: #FFFFFF;
+}
+
+.header2 td {
+	background-color: #d9d8d6;
+	color: #355564;
+	text-align: left;
+}
+
+.header2 a {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.header2 td.symbol {
+	width: 15px;
+}
+
+.header2 td.symbol a {
+	text-decoration: none;
+}
+
+.header2 td.date {
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.header2 td.title {
+	padding-left: 3px;
+	padding-right: 3px;
+	width: 95%;
+}
+
+h1 {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+h2 {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+table.entity {
+	border-left: thin solid black;
+	border-top: thin solid black;
+	empty-cells: show;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.entity tr:hover {
+	background-color: #d9d8d6;
+}
+
+.entity th {
+	background-color: #4b758b;
+	#background-color: #355564;
+	color: white;
+	padding: 5px 5px 5px 5px;
+	border-right: thin solid black;
+	border-bottom: thin solid black;
+}
+
+.entity tr th {
+	vertical-align: top;
+}
+
+.entity td {
+	vertical-align: top;
+	padding: 5px 5px 5px 5px;
+	border-right: thin solid black;
+	border-bottom: thin solid black;
+}
+
+.center {
+	text-align: center;
+}
+
+.thGroup {
+	text-align: left;
+	vertical-align: top;
+}

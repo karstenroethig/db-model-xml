@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<title>${database.name} ${database.version}</title>
+		<link rel="stylesheet" href="resources/style.css" type="text/css"/>
+	</head>
+	<body>
+		<table class="header" width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr class="header1">
+				<td>
+					<div>
+						<img align="absMiddle" src="resources/database.png" vspace="4" hspace="4" complete="complete"/>
+						${database.name} ${database.version}
+					</div>
+				</td>
+			</tr>
+			<tr class="header2">
+				<td>
+					<table width="100%" border="0" cellSpacing="0" cellPadding="0">
+						<tr>
+							<td class="title">
+								Tabellen
+							</td>
+							<td class="symbol">
+								<a href="">
+									<img align="absMiddle" src="resources/consulting.png" border="0" hspace="2" complete="complete"/>
+								</a>
+							</td>
+							<td class="symbol">
+								<a href="javascript:window.print();">
+									<img align="absMiddle" src="resources/print.png" border="0" hspace="2" complete="complete"/>
+								</a>
+							</td>
+							<td class="date">${createDateStr}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<h1>Tabellenbeschreibung</h1>
+		<table class="entity" cellpadding="0" cellspacing="0">
+			<thead>
+				#if( $database.categories.size() > 0 )
+					<th>&nbsp;</th>
+				#end
+				<th>Tabelle</th>
+				#foreach( $entityPropertyKey in $entityPropertyKeys )
+					<th>${entityPropertyKey}</th>
+				#end
+				<th>Beschreibung</th>
+			</thead>
+			#if( $database.categories.size() > 0 )
+				
+				#foreach( $category in $database.categories )
+				
+					#set( $entities = $database.getEntitiesByCategory( $category ) )
+					#set( $rowSpan = $entities.size() )
+					#set( $first = true )
+					
+					#foreach( $entity in $entities )
+					
+						<tr>
+							#if( $first )
+								#set( $first = false )
+								<th rowspan="${rowSpan}" class="thGroup">${category}</th>
+							#end
+							<td>
+								<a href="entities/${entity.name}.html">${entity.name}</a>
+							</td>
+							#foreach( $entityPropertyKey in $entityPropertyKeys )
+							
+								<td class="center">
+								#if( $entity.hasProperty( $entityPropertyKey ) )
+									$entity.getProperty( $entityPropertyKey )
+								#else
+									-
+								#end
+								</td>
+							#end
+							<td>${entity.descriptionShort}</td>
+						</tr>
+						
+					#end
+				#end
+
+			#else
+				
+				#foreach( $entity in $database.entities )
+
+					<tr>
+						<td>
+							<a href="entities/${entity.name}.html">${entity.name}</a>
+						</td>
+						<td class="center">x</td>
+						<td class="center">x</td>
+						<td>${entity.descriptionShort}</td>
+					</tr>
+					
+				#end
+				
+			#end
+		</table>
+	</body>
+</html>

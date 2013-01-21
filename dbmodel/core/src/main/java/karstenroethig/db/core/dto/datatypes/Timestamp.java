@@ -22,4 +22,9 @@ public class Timestamp extends AbstractDatatype {
 	public DatatypeEnum getType() {
 		return DatatypeEnum.TIMESTAMP;
 	}
+
+	@Override
+	public String getSimpleDescription() {
+		return "timestamp";
+	}
 }

@@ -21,4 +21,9 @@ public class Int extends AbstractDatatype {
 		return DatatypeEnum.INT;
 	}
 
+	@Override
+	public String getSimpleDescription() {
+		return "int";
+	}
+
 }

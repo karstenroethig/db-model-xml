@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<title>${database.name} ${database.version} &gt; ${entity.name}</title>
+		<link rel="stylesheet" href="../resources/style.css" type="text/css"/>
+	</head>
+	<body>
+		<table class="header" width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr class="header1">
+				<td>
+					<div>
+						<img align="absMiddle" src="../resources/database.png" vspace="4" hspace="4" complete="complete"/>
+						${database.name} ${database.version}
+					</div>
+				</td>
+			</tr>
+			<tr class="header2">
+				<td>
+					<table width="100%" border="0" cellSpacing="0" cellPadding="0">
+						<tr>
+							<td class="title">
+								<a href="../index.html">Tabellen</a> &gt; ${entity.name}
+							</td>
+							<td class="symbol">
+								<a href="">
+									<img align="absMiddle" src="../resources/consulting.png" border="0" hspace="2" complete="complete"/>
+								</a>
+							</td>
+							<td class="symbol">
+								<a href="javascript:window.print();">
+									<img align="absMiddle" src="../resources/print.png" border="0" hspace="2" complete="complete"/>
+								</a>
+							</td>
+							<td class="date">${createDateStr}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<h1>${entity.name}</h1>
+		<h2>${entity.descriptionShort}</h2>
+		<table class="entity" cellpadding="0" cellspacing="0">
+			<thead>
+				<th>LfdNr</th>
+				<th>Spalte</th>
+				<th>PK</th>
+				<th>Datentyp</th>
+				<th>Beschreibung</th>
+				#foreach( $attributePropertyKey in $attributePropertyKeys )
+					<th>${attributePropertyKey}</th>
+				#end
+				<th>Feld-ID</th>
+			</thead>
+			#set( $count = 1 )
+			
+			#foreach( $attribute in $entity.attributes )
+				
+				<tr>
+					<th>${count}</th>
+					<td>${attribute.name}</td>
+					<td class="center">
+						#if( $attribute.primaryKey )
+							x
+						#else
+							&nbsp;
+						#end
+					</td>
+					<td>${attribute.datatype.simpleDescription}</td>
+					<td>${textUtils.plainTextToHtml( $attribute.descriptionLong )}</td>
+					
+					#foreach( $attributePropertyKey in $attributePropertyKeys )
+					
+						<td class="center">
+						#if( $attribute.hasProperty( $attributePropertyKey ) )
+							$attribute.getProperty( $attributePropertyKey )
+						#else
+							-
+						#end
+						</td>
+					#end
+
+					<td class="center">
+						#if( $attribute.fieldId > 0 )
+							${attribute.fieldId}
+						#else
+							&nbsp;
+						#end
+					</td>
+				</tr>
+				
+				#set( $count = $count + 1 )
+				
+			#end
+		</table>
+	</body>
+</html>

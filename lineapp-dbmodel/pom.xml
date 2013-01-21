@@ -45,6 +45,13 @@
 					<groupId>karstenroethig.db</groupId>
 					<artifactId>dbmodel-maven-plugin</artifactId>
 					<version>1.0.0-SNAPSHOT</version>
+					<dependencies>
+						<dependency>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>${project.artifactId}</artifactId>
+							<version>${project.version}</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -83,6 +90,9 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<databaseLocatorClass>karstenroethig.db.lineapp.xml.DatabaseLocator</databaseLocatorClass>
+				</configuration>
 			</plugin>
 
 		</plugins>

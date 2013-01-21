@@ -20,4 +20,9 @@ public class Date extends AbstractDatatype {
 	public DatatypeEnum getType() {
 		return DatatypeEnum.DATE;
 	}
+
+	@Override
+	public String getSimpleDescription() {
+		return "date";
+	}
 }
