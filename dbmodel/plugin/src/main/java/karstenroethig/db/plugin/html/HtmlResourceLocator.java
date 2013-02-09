@@ -1,11 +1,6 @@
 package karstenroethig.db.plugin.html;
 
-import java.net.URL;
+import karstenroethig.db.plugin.ResourceLocator;
 
-public class HtmlResourceLocator {
-
-	public URL resolve( String filename ) {
-        return this.getClass().getResource( filename );
-    }
-	
+public class HtmlResourceLocator extends ResourceLocator {
 }
