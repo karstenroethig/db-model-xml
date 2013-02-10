@@ -40,22 +40,4 @@ public class Decimal extends AbstractDatatype {
 	public DatatypeEnum getType() {
 		return DatatypeEnum.DECIMAL;
 	}
-
-	@Override
-	public String getSimpleDescription() {
-		
-		StringBuffer desc = new StringBuffer();
-		
-		desc.append( "decimal(" );
-		desc.append( getPrecision() );
-		
-		if( getScale() > 0 ) {
-			desc.append( ", " );
-			desc.append( getScale() );
-		}
-		
-		desc.append( ")" );
-		
-		return desc.toString();
-	}
 }

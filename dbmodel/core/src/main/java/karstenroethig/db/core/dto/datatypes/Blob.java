@@ -6,9 +6,4 @@ public class Blob extends AbstractDatatype {
 	public DatatypeEnum getType() {
 		return DatatypeEnum.BLOB;
 	}
-
-	@Override
-	public String getSimpleDescription() {
-		return "image";
-	}
 }

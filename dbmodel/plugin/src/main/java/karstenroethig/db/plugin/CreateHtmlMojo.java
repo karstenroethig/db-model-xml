@@ -11,6 +11,7 @@ import java.util.Map;
 import karstenroethig.db.core.dto.Attribute;
 import karstenroethig.db.core.dto.Database;
 import karstenroethig.db.core.dto.Entity;
+import karstenroethig.db.core.formatter.SimpleDatatypeFormatter;
 import karstenroethig.db.plugin.html.HtmlResourceLocator;
 
 import org.apache.maven.plugin.MojoExecutionException;
@@ -87,10 +88,13 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
 
                 }
 
+                SimpleDatatypeFormatter datatypeFormatter = new SimpleDatatypeFormatter();
+
                 Map<String, Object> entityParams = new HashMap<String, Object>();
 
                 entityParams.put( "entity", entity );
                 entityParams.put( "attributePropertyKeys", attributePropertyKeys );
+                entityParams.put( "datatypeFormatter", datatypeFormatter );
 
                 evaluateFileWithVelocity( "entity.html", outputDirectory, "entities", entity.getName() + ".html",
                     entityParams );

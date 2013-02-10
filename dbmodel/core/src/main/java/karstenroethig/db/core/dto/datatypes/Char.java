@@ -30,9 +30,4 @@ public class Char extends AbstractDatatype {
 	public DatatypeEnum getType() {
 		return DatatypeEnum.CHAR;
 	}
-
-	@Override
-	public String getSimpleDescription() {
-		return "char(" + getLength() + ")";
-	}
 }

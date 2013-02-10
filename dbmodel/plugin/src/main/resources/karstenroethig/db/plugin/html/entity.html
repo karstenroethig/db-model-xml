@@ -67,7 +67,7 @@
 							&nbsp;
 						#end
 					</td>
-					<td>${attribute.datatype.simpleDescription}</td>
+					<td>${datatypeFormatter.format( $attribute.datatype )}</td>
 					<td>${textUtils.plainTextToHtml( $attribute.descriptionLong )}</td>
 					
 					#foreach( $attributePropertyKey in $attributePropertyKeys )

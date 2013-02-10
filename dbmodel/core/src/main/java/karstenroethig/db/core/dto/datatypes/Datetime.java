@@ -22,9 +22,4 @@ public class Datetime extends AbstractDatatype {
 	public DatatypeEnum getType() {
 		return DatatypeEnum.DATETIME;
 	}
-
-	@Override
-	public String getSimpleDescription() {
-		return "datetime";
-	}
 }

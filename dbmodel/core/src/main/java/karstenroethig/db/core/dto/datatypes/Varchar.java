@@ -30,9 +30,4 @@ public class Varchar extends AbstractDatatype {
 	public DatatypeEnum getType() {
 		return DatatypeEnum.VARCHAR;
 	}
-
-	@Override
-	public String getSimpleDescription() {
-		return "varchar(" + getLength() + ")";
-	}
 }
