@@ -33,10 +33,6 @@ public class TextUtils {
      * Escape html entity characters and high characters (eg "curvy" Word quotes).
      *
      * <p>Note this method can also be used to encode XML</p>
-     *
-     * @param   s  DOCUMENT ME!
-     *
-     * @return  DOCUMENT ME!
      */
     public static final String htmlEncode( String s ) {
         return htmlEncode( s, true );
@@ -191,25 +187,10 @@ public class TextUtils {
         return str;
     }
 
-    /**
-     * DOCUMENT ME!
-     *
-     * @param   string  DOCUMENT ME!
-     *
-     * @return  DOCUMENT ME!
-     */
     public static final String noNull( String string ) {
         return noNull( string, StringUtils.EMPTY );
     }
 
-    /**
-     * DOCUMENT ME!
-     *
-     * @param   string         DOCUMENT ME!
-     * @param   defaultString  DOCUMENT ME!
-     *
-     * @return  DOCUMENT ME!
-     */
     public static final String noNull( String string, String defaultString ) {
 
         if( StringUtils.isNotBlank( string ) ) {
