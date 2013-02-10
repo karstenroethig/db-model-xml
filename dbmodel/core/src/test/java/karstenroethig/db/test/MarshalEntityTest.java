@@ -29,8 +29,7 @@ public class MarshalEntityTest {
 		Entity entity = new Entity();
 		
 		entity.setName("Headline");
-		entity.setDescriptionShort("Kurzbeschreibung");
-		entity.setDescriptionLong("Lange Beschreibung");
+		entity.setDescription("Beschreibung");
 		
 		// Entity -> Properteis
 		Properties props = new Properties();
@@ -102,10 +101,7 @@ public class MarshalEntityTest {
 		attr.setName(name);
 		attr.setPrimaryKey(pk);
 		attr.setNullable(nullable);
-		attr.setFieldId(new BigInteger("1"));
-		attr.setNotation("V_" + name.toUpperCase());
-		attr.setDescriptionShort("Kurzbeschreibung");
-		attr.setDescriptionLong("Lange Beschreibung");
+		attr.setDescription("Beschreibung");
 		
 		Datatype datatype = new Datatype();
 		datatype.setType(type);

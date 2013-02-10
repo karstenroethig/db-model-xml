@@ -2,9 +2,7 @@
 
 <entity name="Contact">
 
-    <descriptionLong>Lange Beschreibung</descriptionLong>
-
-    <descriptionShort>Kurzbeschreibung</descriptionShort>
+    <description>Beschreibung</description>
 
     <properties>
         <property value="value1" key="key1"/>
@@ -13,40 +11,36 @@
 
     <attributes>
 
-        <attribute name="id" primaryKey="true" nullable="false" notation="V_ID" fieldId="1">
+        <attribute name="id" primaryKey="true" nullable="false">
             <datatype type="decimal" precision="18" scale="0" defaultValue="0"/>
-            <descriptionLong>Lange Beschreibung</descriptionLong>
-            <descriptionShort>Kurzbeschreibung</descriptionShort>
+            <description>Beschreibung</description>
             <properties>
                 <property value="value1" key="key1"/>
                 <property value="value2" key="key2"/>
             </properties>
         </attribute>
 
-        <attribute name="todoId" primaryKey="false" nullable="false" notation="V_TODOID" fieldId="1">
+        <attribute name="todoId" primaryKey="false" nullable="false">
             <datatype type="decimal" precision="18" scale="0" defaultValue="0"/>
-            <descriptionLong>Lange Beschreibung</descriptionLong>
-            <descriptionShort>Kurzbeschreibung</descriptionShort>
+            <description>Beschreibung</description>
             <properties>
                 <property value="value1" key="key1"/>
                 <property value="value2" key="key2"/>
             </properties>
         </attribute>
 
-        <attribute name="dateCreated" primaryKey="false" nullable="false" notation="V_DATECREATED" fieldId="1">
+        <attribute name="dateCreated" primaryKey="false" nullable="false">
             <datatype type="datetime" defaultValue="01.01.1800"/>
-            <descriptionLong>Lange Beschreibung</descriptionLong>
-            <descriptionShort>Kurzbeschreibung</descriptionShort>
+            <description>Beschreibung</description>
             <properties>
                 <property value="value1" key="key1"/>
                 <property value="value2" key="key2"/>
             </properties>
         </attribute>
 
-        <attribute name="lastUpdated" primaryKey="false" nullable="true" notation="V_LASTUPDATED" fieldId="1">
+        <attribute name="lastUpdated" primaryKey="false" nullable="true">
             <datatype type="datetime" defaultValue="null"/>
-            <descriptionLong>Lange Beschreibung</descriptionLong>
-            <descriptionShort>Kurzbeschreibung</descriptionShort>
+            <description>Beschreibung</description>
             <properties>
                 <property value="value1" key="key1"/>
                 <property value="value2" key="key2"/>

@@ -6,8 +6,7 @@
 	<xsd:element name="entity">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="descriptionLong" maxOccurs="1" minOccurs="0" type="xsd:string"/>
-				<xsd:element name="descriptionShort" maxOccurs="1" minOccurs="0" type="xsd:string"/>
+				<xsd:element name="description" maxOccurs="1" minOccurs="0" type="xsd:string"/>
 				<xsd:element ref="properties" maxOccurs="1" minOccurs="0"/>
 				<xsd:element ref="attributes" maxOccurs="1" minOccurs="0"/>
 				<xsd:element ref="relationships" maxOccurs="1" minOccurs="0"/>
@@ -31,15 +30,12 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element ref="datatype" maxOccurs="1" minOccurs="1"/>
-				<xsd:element name="descriptionLong" maxOccurs="1" minOccurs="1" type="xsd:string"/>
-				<xsd:element name="descriptionShort" maxOccurs="1" minOccurs="1" type="xsd:string"/>
+				<xsd:element name="description" maxOccurs="1" minOccurs="1" type="xsd:string"/>
 				<xsd:element ref="properties" maxOccurs="1" minOccurs="0"/>
 			</xsd:sequence>
 			<xsd:attribute name="name" type="xsd:string" use="required"/>
 			<xsd:attribute name="primaryKey" type="xsd:boolean" use="optional"/>
 			<xsd:attribute name="nullable" type="xsd:boolean" use="optional"/>
-			<xsd:attribute name="fieldId" type="xsd:integer" use="required"/>
-			<xsd:attribute name="notation" type="xsd:string" use="optional"/>
 		</xsd:complexType>
 	</xsd:element>
 	

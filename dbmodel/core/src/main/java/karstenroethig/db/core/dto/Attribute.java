@@ -13,10 +13,7 @@ public class Attribute {
 	private String name;
 	private boolean primaryKey;
 	private boolean nullable;
-	private String descriptionShort;
-	private String descriptionLong;
-	private Integer fieldId;
-	private String notation;
+	private String description;
 	
 	private Map<String, String> properties;
 	
@@ -26,10 +23,7 @@ public class Attribute {
 		this.name = StringUtils.EMPTY;
 		this.primaryKey = false;
 		this.nullable = true;
-		this.descriptionShort = StringUtils.EMPTY;
-		this.descriptionLong = StringUtils.EMPTY;
-		this.fieldId = null;
-		this.notation = StringUtils.EMPTY;
+		this.description = StringUtils.EMPTY;
 		
 		this.properties = new HashMap<String, String>();
 		
@@ -60,36 +54,12 @@ public class Attribute {
 		this.nullable = nullable;
 	}
 
-	public String getDescriptionShort() {
-		return descriptionShort;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescriptionShort(String descriptionShort) {
-		this.descriptionShort = descriptionShort;
-	}
-
-	public String getDescriptionLong() {
-		return descriptionLong;
-	}
-
-	public void setDescriptionLong(String descriptionLong) {
-		this.descriptionLong = descriptionLong;
-	}
-
-	public Integer getFieldId() {
-		return fieldId;
-	}
-
-	public void setFieldId(Integer fieldId) {
-		this.fieldId = fieldId;
-	}
-
-	public String getNotation() {
-		return notation;
-	}
-
-	public void setNotation(String notation) {
-		this.notation = notation;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	public Set<String> getPropertyKeys() {

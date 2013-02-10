@@ -13,8 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 public class Entity {
 
 	private String name;
-	private String descriptionShort;
-	private String descriptionLong;
+	private String description;
 	
 	private Map<String, String> properties;
 	
@@ -23,8 +22,7 @@ public class Entity {
 	
 	public Entity() {
 		this.name = StringUtils.EMPTY;
-		this.descriptionShort = StringUtils.EMPTY;
-		this.descriptionLong = StringUtils.EMPTY;
+		this.description = StringUtils.EMPTY;
 		
 		this.properties = new HashMap<String, String>();
 		
@@ -40,20 +38,12 @@ public class Entity {
 		this.name = name;
 	}
 
-	public String getDescriptionShort() {
-		return descriptionShort;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescriptionShort(String descriptionShort) {
-		this.descriptionShort = descriptionShort;
-	}
-
-	public String getDescriptionLong() {
-		return descriptionLong;
-	}
-
-	public void setDescriptionLong(String descriptionLong) {
-		this.descriptionLong = descriptionLong;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	public Set<String> getPropertyKeys() {

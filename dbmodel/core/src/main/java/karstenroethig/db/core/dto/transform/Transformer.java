@@ -99,8 +99,7 @@ public class Transformer {
 		Entity entity = new Entity();
 		
 		entity.setName( jaxbEntity.getName() );
-		entity.setDescriptionShort( jaxbEntity.getDescriptionShort() );
-		entity.setDescriptionLong( jaxbEntity.getDescriptionLong() );
+		entity.setDescription( jaxbEntity.getDescription() );
 		
 		// Properties
 		karstenroethig.db.core.jaxb.entity.Properties jaxbProperties = jaxbEntity.getProperties();
@@ -201,9 +200,7 @@ public class Transformer {
 		Attribute attribute = new Attribute();
 		
 		attribute.setName( jaxbAttribute.getName() );
-		attribute.setNotation( jaxbAttribute.getNotation() );
-		attribute.setDescriptionShort( jaxbAttribute.getDescriptionShort() );
-		attribute.setDescriptionLong( jaxbAttribute.getDescriptionLong() );
+		attribute.setDescription( jaxbAttribute.getDescription() );
 		
 		if( jaxbAttribute.isPrimaryKey() != null ) {
 			attribute.setPrimaryKey( jaxbAttribute.isPrimaryKey() );
@@ -211,10 +208,6 @@ public class Transformer {
 		
 		if( jaxbAttribute.isNullable() != null ) {
 			attribute.setNullable( jaxbAttribute.isNullable() );
-		}
-		
-		if( jaxbAttribute.getFieldId() != null ) {
-			attribute.setFieldId( jaxbAttribute.getFieldId().intValue() );
 		}
 		
 		// Datentyp
@@ -547,8 +540,7 @@ public class Transformer {
 			karstenroethig.db.core.jaxb.entity.Entity jaxbEntity = jaxbObjectFactory.createEntity();
 			
 			jaxbEntity.setName( entity.getName() );
-			jaxbEntity.setDescriptionShort( entity.getDescriptionShort() );
-			jaxbEntity.setDescriptionLong( entity.getDescriptionLong() );
+			jaxbEntity.setDescription( entity.getDescription() );
 			
 			// Properties
 			Set<String> propertyKeys = entity.getPropertyKeys();
@@ -584,15 +576,9 @@ public class Transformer {
 					karstenroethig.db.core.jaxb.entity.Attribute jaxbAttribute = jaxbObjectFactory.createAttribute();
 					
 					jaxbAttribute.setName( attribute.getName() );
-					jaxbAttribute.setDescriptionShort( attribute.getDescriptionShort() );
-					jaxbAttribute.setDescriptionLong( attribute.getDescriptionLong() );
+					jaxbAttribute.setDescription( attribute.getDescription() );
 					jaxbAttribute.setPrimaryKey( attribute.isPrimaryKey() );
 					jaxbAttribute.setNullable( attribute.isNullable() );
-					jaxbAttribute.setNotation( attribute.getNotation() );
-					
-					if( attribute.getFieldId() != null ) {
-						jaxbAttribute.setFieldId( new BigInteger( attribute.getFieldId() + StringUtils.EMPTY ) );
-					}
 					
 					// Properties
 					propertyKeys = attribute.getPropertyKeys();
