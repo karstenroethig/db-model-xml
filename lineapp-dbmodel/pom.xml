@@ -83,10 +83,11 @@
 				<artifactId>dbmodel-maven-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>create-html</id>
+						<id>create</id>
 						<phase>package</phase>
 						<goals>
 							<goal>create-html</goal>
+							<goal>create-sql</goal>
 						</goals>
 					</execution>
 				</executions>
