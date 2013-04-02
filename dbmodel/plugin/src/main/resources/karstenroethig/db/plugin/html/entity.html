@@ -44,7 +44,7 @@
 		<table class="entity" cellpadding="0" cellspacing="0">
 			<thead>
 				<th>LfdNr</th>
-				<th>Spalte</th>
+				<th>Attribut</th>
 				<th>PK</th>
 				<th>Datentyp</th>
 				<th>Beschreibung</th>
@@ -58,20 +58,20 @@
 				
 				<tr>
 					<th>${count}</th>
-					<td>${attribute.name}</td>
-					<td class="center">
+					<td class="nowrap" title="Attribut">${attribute.name}</td>
+					<td class="center" title="PK">
 						#if( $attribute.primaryKey )
 							x
 						#else
 							&nbsp;
 						#end
 					</td>
-					<td>${datatypeFormatter.format( $attribute.datatype )}</td>
-					<td>${textUtils.plainTextToHtml( $attribute.description )}</td>
+					<td class="nowrap" title="Datentyp">${datatypeFormatter.format( $attribute.datatype )}</td>
+					<td title="Beschreibung">${textUtils.plainTextToHtml( $attribute.description )}</td>
 					
 					#foreach( $attributePropertyKey in $attributePropertyKeys )
 					
-						<td class="center">
+						<td class="center" title="${attributePropertyKey}">
 						#if( $attribute.hasProperty( $attributePropertyKey ) )
 							$attribute.getProperty( $attributePropertyKey )
 						#else

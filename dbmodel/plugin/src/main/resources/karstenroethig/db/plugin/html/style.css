@@ -98,6 +98,10 @@ table.entity {
 	border-bottom: thin solid black;
 }
 
+.nowrap {
+	white-space: nowrap;
+}
+
 .center {
 	text-align: center;
 }

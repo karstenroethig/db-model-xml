@@ -66,12 +66,12 @@
 								#set( $first = false )
 								<th rowspan="${rowSpan}" class="thGroup">${category}</th>
 							#end
-							<td>
+							<td title="Tabelle">
 								<a href="entities/${entity.name}.html">${entity.name}</a>
 							</td>
 							#foreach( $entityPropertyKey in $entityPropertyKeys )
 							
-								<td class="center">
+								<td class="center" title="${entityPropertyKey}">
 								#if( $entity.hasProperty( $entityPropertyKey ) )
 									$entity.getProperty( $entityPropertyKey )
 								#else
@@ -79,7 +79,7 @@
 								#end
 								</td>
 							#end
-							<td>${entity.description}</td>
+							<td title="Beschreibung">${entity.description}</td>
 						</tr>
 						
 					#end
@@ -90,12 +90,20 @@
 				#foreach( $entity in $database.entities )
 
 					<tr>
-						<td>
+						<td title="Tabelle">
 							<a href="entities/${entity.name}.html">${entity.name}</a>
 						</td>
-						<td class="center">x</td>
-						<td class="center">x</td>
-						<td>${entity.description}</td>
+						#foreach( $entityPropertyKey in $entityPropertyKeys )
+						
+							<td class="center" title="${entityPropertyKey}">
+							#if( $entity.hasProperty( $entityPropertyKey ) )
+								$entity.getProperty( $entityPropertyKey )
+							#else
+								-
+							#end
+							</td>
+						#end
+						<td title="Beschreibung">${entity.description}</td>
 					</tr>
 					
 				#end
