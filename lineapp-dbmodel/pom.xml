@@ -29,6 +29,7 @@
 			<groupId>karstenroethig.db</groupId>
 			<artifactId>dbmodel-test</artifactId>
 			<version>${dbmodel.version}</version>
+			<scope>test</scope>
 		</dependency>
 		
 		<dependency>
