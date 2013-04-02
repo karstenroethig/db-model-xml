@@ -64,4 +64,24 @@ public class DatabaseModel {
 		return Transformer.transformJaxb2Dto( jaxbDatabase, jaxbEntitiesMap );
 	}
 	
+    public static karstenroethig.db.core.jaxb.database.Database loadJaxbDatabaseModel( AbstractDatabaseLocator databaseLocator ) {
+
+    	if( databaseLocator == null ) {
+    		return null;
+    	}
+
+    	try {
+
+    		// Database
+    		JAXBContext jaxbDbContext = JAXBContext.newInstance( karstenroethig.db.core.jaxb.database.Database.class );
+    		Unmarshaller dbUnmarshaller = jaxbDbContext.createUnmarshaller();
+
+    		return ( karstenroethig.db.core.jaxb.database.Database )dbUnmarshaller.unmarshal( databaseLocator.resolve() );
+
+    	} catch( JAXBException ex ) {
+    	}
+
+    	return null;
+	}
+	
 }

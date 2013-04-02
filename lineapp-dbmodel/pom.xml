@@ -15,13 +15,27 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<dbmodel.version>1.0.0-SNAPSHOT</dbmodel.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>karstenroethig.db</groupId>
 			<artifactId>dbmodel-core</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>${dbmodel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>karstenroethig.db</groupId>
+			<artifactId>dbmodel-test</artifactId>
+			<version>${dbmodel.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	
@@ -44,7 +58,7 @@
 				<plugin>
 					<groupId>karstenroethig.db</groupId>
 					<artifactId>dbmodel-maven-plugin</artifactId>
-					<version>1.0.0-SNAPSHOT</version>
+					<version>${dbmodel.version}</version>
 					<dependencies>
 						<dependency>
 							<groupId>${project.groupId}</groupId>
@@ -83,7 +97,7 @@
 				<artifactId>dbmodel-maven-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>create</id>
+						<id>create-files</id>
 						<phase>package</phase>
 						<goals>
 							<goal>create-html</goal>

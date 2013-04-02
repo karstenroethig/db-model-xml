@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
-<database name="${project.name}" version="${project.version}" createDateString="${timestamp}" svnRevisionString="${buildNumber}">
+<database name="${project.name}" version="${project.version}" createDate="${timestamp}" svnRevision="${buildNumber}">
     <entities>
         <entity category="Headlines" name="Headline"/>
         <entity category="Headlines" name="Scene"/>
