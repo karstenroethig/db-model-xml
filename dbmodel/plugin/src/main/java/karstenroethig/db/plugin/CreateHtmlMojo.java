@@ -87,6 +87,8 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
                     }
 
                 }
+                
+                Collections.sort( attributePropertyKeys );
 
                 SimpleDatatypeFormatter datatypeFormatter = new SimpleDatatypeFormatter();
 
