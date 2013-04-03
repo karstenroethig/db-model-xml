@@ -10,6 +10,10 @@ public enum DatatypeEnum {
 	
 	INT(),
 	
+	BIGINT(),
+	
+	BIT(),
+	
 	DATETIME(),
 	
 	DATE(),

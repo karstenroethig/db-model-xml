@@ -1,6 +1,8 @@
 package karstenroethig.db.core.formatter;
 
 import karstenroethig.db.core.dto.datatypes.AbstractDatatype;
+import karstenroethig.db.core.dto.datatypes.Bigint;
+import karstenroethig.db.core.dto.datatypes.Bit;
 import karstenroethig.db.core.dto.datatypes.Blob;
 import karstenroethig.db.core.dto.datatypes.Char;
 import karstenroethig.db.core.dto.datatypes.DatatypeEnum;
@@ -30,6 +32,10 @@ public class SimpleDatatypeFormatter implements IFormatter<AbstractDatatype> {
 			return formatVarchar( (Varchar)datatype );
 		} else if( datatype.getType() == DatatypeEnum.INT ) {
 			return formatInt( (Int)datatype );
+		} else if( datatype.getType() == DatatypeEnum.BIGINT ) {
+			return formatBigint( (Bigint)datatype );
+		} else if( datatype.getType() == DatatypeEnum.BIT ) {
+			return formatBit( (Bit)datatype );
 		} else if( datatype.getType() == DatatypeEnum.DATETIME ) {
 			return formatDatetime( (Datetime)datatype );
 		} else if( datatype.getType() == DatatypeEnum.DATE ) {
@@ -70,6 +76,14 @@ public class SimpleDatatypeFormatter implements IFormatter<AbstractDatatype> {
 	
 	private String formatInt( Int datatype ) {
 		return "int";
+	}
+	
+	private String formatBigint( Bigint datatype ) {
+		return "bigint";
+	}
+	
+	private String formatBit( Bit datatype ) {
+		return "bit";
 	}
 	
 	private String formatDatetime( Datetime datatype ) {

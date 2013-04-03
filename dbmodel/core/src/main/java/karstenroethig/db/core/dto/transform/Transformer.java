@@ -17,6 +17,8 @@ import karstenroethig.db.core.dto.associations.ManyToOne;
 import karstenroethig.db.core.dto.associations.OneToMany;
 import karstenroethig.db.core.dto.associations.OneToOne;
 import karstenroethig.db.core.dto.datatypes.AbstractDatatype;
+import karstenroethig.db.core.dto.datatypes.Bigint;
+import karstenroethig.db.core.dto.datatypes.Bit;
 import karstenroethig.db.core.dto.datatypes.Blob;
 import karstenroethig.db.core.dto.datatypes.Char;
 import karstenroethig.db.core.dto.datatypes.DatatypeEnum;
@@ -310,6 +312,42 @@ public class Transformer {
 		if( jaxbDatatype.getType() == karstenroethig.db.core.jaxb.entity.DatatypeEnum.INT ) {
 			
 			Int datatype = new Int();
+			
+			if( StringUtils.isNotBlank( jaxbDatatype.getDefaultValue() ) && StringUtils.isNumeric( jaxbDatatype.getDefaultValue() ) ) {
+				
+				try {
+					datatype.setDefaultValue( Integer.parseInt( jaxbDatatype.getDefaultValue() ) );
+				} catch( NumberFormatException ex ) {
+					// Nothing to do
+				}
+				
+			}
+			
+			return datatype;
+		}
+		
+		// Bigint
+		if( jaxbDatatype.getType() == karstenroethig.db.core.jaxb.entity.DatatypeEnum.BIGINT ) {
+			
+			Bigint datatype = new Bigint();
+			
+			if( StringUtils.isNotBlank( jaxbDatatype.getDefaultValue() ) && StringUtils.isNumeric( jaxbDatatype.getDefaultValue() ) ) {
+				
+				try {
+					datatype.setDefaultValue( Integer.parseInt( jaxbDatatype.getDefaultValue() ) );
+				} catch( NumberFormatException ex ) {
+					// Nothing to do
+				}
+				
+			}
+			
+			return datatype;
+		}
+		
+		// Bit
+		if( jaxbDatatype.getType() == karstenroethig.db.core.jaxb.entity.DatatypeEnum.BIT ) {
+			
+			Bit datatype = new Bit();
 			
 			if( StringUtils.isNotBlank( jaxbDatatype.getDefaultValue() ) && StringUtils.isNumeric( jaxbDatatype.getDefaultValue() ) ) {
 				
@@ -657,6 +695,26 @@ public class Transformer {
 
 						if( intType.getDefaultValue() != null ) {
 							jaxbDatatype.setDefaultValue( intType.getDefaultValue().toString() );
+						}
+						
+					} else if( datatype.getType() == DatatypeEnum.BIGINT ) {
+
+						Bigint bigintType = (Bigint)datatype;
+						
+						jaxbDatatype.setType( karstenroethig.db.core.jaxb.entity.DatatypeEnum.BIGINT );
+
+						if( bigintType.getDefaultValue() != null ) {
+							jaxbDatatype.setDefaultValue( bigintType.getDefaultValue().toString() );
+						}
+						
+					} else if( datatype.getType() == DatatypeEnum.BIT ) {
+
+						Bit bitType = (Bit)datatype;
+						
+						jaxbDatatype.setType( karstenroethig.db.core.jaxb.entity.DatatypeEnum.BIT );
+
+						if( bitType.getDefaultValue() != null ) {
+							jaxbDatatype.setDefaultValue( bitType.getDefaultValue().toString() );
 						}
 						
 					} else if( datatype.getType() == DatatypeEnum.DATETIME ) {

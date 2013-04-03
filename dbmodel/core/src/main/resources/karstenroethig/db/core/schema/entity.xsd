@@ -42,7 +42,7 @@
 	<!-- Datentyp -->
 	<xsd:element name="datatype">
 		<xsd:complexType>
-			<!-- Datentyp (decimal, char, varchar, int, datetime, date, timestamp, blob) -->
+			<!-- Datentyp (decimal, char, varchar, int, bigint, bit, datetime, date, timestamp, blob) -->
 			<xsd:attribute name="type" type="datatypeEnum" use="required"/>
 			<xsd:attribute name="defaultValue" type="xsd:string" use="optional"/>
 			<!-- decimal -> precision (Genauigkeit) -->
@@ -127,6 +127,8 @@
 			<xsd:enumeration value="char"/>
 			<xsd:enumeration value="varchar"/>
 			<xsd:enumeration value="int"/>
+			<xsd:enumeration value="bigint"/>
+			<xsd:enumeration value="bit"/>
 			<xsd:enumeration value="datetime"/>
 			<xsd:enumeration value="date"/>
 			<xsd:enumeration value="timestamp"/>
