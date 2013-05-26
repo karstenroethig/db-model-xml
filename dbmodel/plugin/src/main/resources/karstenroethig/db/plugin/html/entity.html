@@ -79,7 +79,9 @@
 						<img id="toggle_expand_${attribute.name}" class="expand" onclick="contract('${attribute.name}');" align="absMiddle" src="../resources/minus.png" border="0" hspace="2" complete="complete"/>
 						<img id="toggle_contract_${attribute.name}" class="contract" onclick="expand('${attribute.name}');" align="absMiddle" src="../resources/plus.png" border="0" hspace="2" complete="complete"/>
 					</td>
-					<td class="nowrap" title="Attribut">${attribute.name}</td>
+					<td class="nowrap" title="Attribut">
+						<a class="anchor" name="${attribute.name}">${attribute.name}</a>
+					</td>
 					<td class="center" title="PK">
 						#if( $attribute.primaryKey )
 							x

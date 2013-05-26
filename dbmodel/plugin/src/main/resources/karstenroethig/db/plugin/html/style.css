@@ -114,3 +114,7 @@ table.entity {
 .contract {
 	display: none;
 }
+
+.anchor {
+	text-decoration: none;
+}
