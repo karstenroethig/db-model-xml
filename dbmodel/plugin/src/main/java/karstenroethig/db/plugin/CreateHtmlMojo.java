@@ -59,7 +59,11 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
             copyFile( "database.png", outputDirectory, "resources", null );
             copyFile( "consulting.png", outputDirectory, "resources", null );
             copyFile( "search.png", outputDirectory, "resources", null );
+            copyFile( "plus.png", outputDirectory, "resources", null );
+            copyFile( "minus.png", outputDirectory, "resources", null );
             copyFile( "style.css", outputDirectory, "resources", null );
+            copyFile( "dbmodel.js", outputDirectory, "resources", null );
+            copyFile( "jquery-1.10.0.min.js", outputDirectory, "resources", null );
             
             if( withOverview ) {
             	
@@ -69,7 +73,11 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
                 copyFile( "database.png", outputDirectory, targetSubDirectory, null );
                 copyFile( "consulting.png", outputDirectory, targetSubDirectory, null );
                 copyFile( "search.png", outputDirectory, targetSubDirectory, null );
+                copyFile( "plus.png", outputDirectory, targetSubDirectory, null );
+                copyFile( "minus.png", outputDirectory, targetSubDirectory, null );
                 copyFile( "style.css", outputDirectory, targetSubDirectory, null );
+                copyFile( "dbmodel.js", outputDirectory, targetSubDirectory, null );
+                copyFile( "jquery-1.10.0.min.js", outputDirectory, targetSubDirectory, null );
             }
 
         } catch( IOException ex ) {

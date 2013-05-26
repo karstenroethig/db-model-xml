@@ -199,5 +199,20 @@ public class TextUtils {
 
         return defaultString;
     }
+    
+    public String shorten( String string, int length ) {
+    	
+    	if( StringUtils.isBlank( string ) ) {
+    		return StringUtils.EMPTY;
+    	}
+    	
+    	string = StringUtils.replace( string, "\n", " " );
+    	
+    	if( string.length() > length ) {
+    		return StringUtils.substring( string, 0, length - 3 ) +  "...";
+    	}
+    	
+    	return string;
+    }
 
 }

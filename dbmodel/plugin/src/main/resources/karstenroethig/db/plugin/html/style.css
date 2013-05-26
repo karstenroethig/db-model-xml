@@ -110,3 +110,7 @@ table.entity {
 	text-align: left;
 	vertical-align: top;
 }
+
+.contract {
+	display: none;
+}
