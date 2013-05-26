@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<title>${database.name} ${database.version} &gt; Suche</title>
+		<link rel="stylesheet" href="resources/style.css" type="text/css"/>
+	</head>
+	<body>
+		<table class="header" width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr class="header1">
+				<td>
+					<div>
+						<img align="absMiddle" src="resources/database.png" vspace="4" hspace="4" complete="complete"/>
+						${database.name} ${database.version}
+					</div>
+				</td>
+			</tr>
+			<tr class="header2">
+				<td>
+					<table width="100%" border="0" cellSpacing="0" cellPadding="0">
+						<tr>
+							<td class="title">
+								#if( $withOverview )
+									<a href="../index.html">Datenbank-Dokumentationen</a> &gt; <a href="index.html">${database.name} ${database.version}</a> &gt; Suche
+								#else
+									<a href="index.html">Tabellen</a> &gt; Suche
+								#end
+							</td>
+							<td class="symbol">
+								<a href="">
+									<img align="absMiddle" src="resources/search.png" border="0" hspace="2" complete="complete"/>
+								</a>
+							</td>
+							<td class="symbol">
+								<a href="">
+									<img align="absMiddle" src="resources/consulting.png" border="0" hspace="2" complete="complete"/>
+								</a>
+							</td>
+							<td class="symbol">
+								<a href="javascript:window.print();">
+									<img align="absMiddle" src="resources/print.png" border="0" hspace="2" complete="complete"/>
+								</a>
+							</td>
+							<td class="date">${createDateStr}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<h1>Suche</h1>
+		<table class="entity" cellpadding="0" cellspacing="0">
+			#foreach( $entity in $database.entities )
+				#foreach( $attribute in $entity.attributes )
+					<tr>
+						<td>
+							<a href="entities/${entity.name}.html#${attribute.name}">${entity.name}.${attribute.name}</a>
+						</td>
+						<td>${textUtils.plainTextToHtml( $textUtils.removeLineBreaks( $attribute.description ) )}</td>
+					</tr>
+				#end
+			#end
+		</table>
+	</body>
+</html>

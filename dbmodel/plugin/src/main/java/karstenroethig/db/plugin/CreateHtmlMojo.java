@@ -161,6 +161,17 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
                 evaluateFileWithVelocity( "entity.html", outputDirectory, targetSubDirectory, entity.getName() + ".html",
                     entityParams );
             }
+            
+            /*
+             * Search
+             */
+            Map<String, Object> searchParams = new HashMap<String, Object>();
+
+            searchParams.put( "withOverview", withOverview );
+            
+            targetSubDirectory = withOverview ? artifactVersion : null;
+
+            evaluateFileWithVelocity( "search.html", outputDirectory, targetSubDirectory, null, searchParams );
     		
     	} catch( Exception ex ) {
             throw new MojoExecutionException( "Error creating files", ex );

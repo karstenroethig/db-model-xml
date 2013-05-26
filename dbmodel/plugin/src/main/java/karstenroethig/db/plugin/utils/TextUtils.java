@@ -206,13 +206,17 @@ public class TextUtils {
     		return StringUtils.EMPTY;
     	}
     	
-    	string = StringUtils.replace( string, "\n", " " );
+    	string = removeLineBreaks( string );
     	
     	if( string.length() > length ) {
     		return StringUtils.substring( string, 0, length - 3 ) +  "...";
     	}
     	
     	return string;
+    }
+    
+    public String removeLineBreaks( String string ) {
+    	return StringUtils.replace( string, "\n", " " );
     }
 
 }
