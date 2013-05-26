@@ -1,33 +1,28 @@
 -- *****************************************************************************
 --
 -- Model    : ${database.name}
--- Datenbank: MS SQL Server 2005
+-- Datenbank: ${dbmsName}
 -- Version	: ${database.version}
 -- Stand    : ${createDateStr}
 --
 -- *****************************************************************************
+#if( $specificLines )
+
+$specificLines
+#end
 
 --------------------------------------------------------------------------------
 -- Tabellen löschen                                                           --
 --------------------------------------------------------------------------------
-#foreach( $entity in $database.entities )
-if object_id( '${entity.name}' ) > 0 drop table ${entity.name}
-#end
-go
+${dropTablesFormatter.format( $database )}
 
 
 --------------------------------------------------------------------------------
 -- Tabellen erstellen                                                         --
 --------------------------------------------------------------------------------
 #foreach( $entity in $database.entities )
-create table ${entity.name} (
-	#foreach( $attribute in $entity.attributes )
-	${attribute.name} ${datatypeFormatter.format( $attribute.datatype )} #if( $attribute.nullable ) null #else not null #end,
-	#end
-	-- TODO primary key contraint
-)
+${createTableFormatter.format( $entity )}
 
 #end
-go
 
 -- ********************************* Dateiende *********************************

@@ -88,13 +88,11 @@ public class DefaultValueFormatter implements IFormatter<AbstractDatatype> {
 
     private String formatDefaultValue( Number defaultValue ) {
 
-        String defaultValueStr = null;
-
         if( defaultValue != null ) {
-            defaultValueStr = defaultValue.toString();
+            return defaultValue.toString();
         }
 
-        return formatDefaultValue( defaultValueStr );
+        return StringUtils.EMPTY;
     }
 
     private String formatDefaultValue( java.util.Date defaultValue ) {
@@ -112,7 +110,7 @@ public class DefaultValueFormatter implements IFormatter<AbstractDatatype> {
     private String formatDefaultValue( String defaultValue ) {
 
         if( defaultValue == null ) {
-            return "null";
+            return StringUtils.EMPTY;
         }
 
         return "'" + defaultValue + "'";

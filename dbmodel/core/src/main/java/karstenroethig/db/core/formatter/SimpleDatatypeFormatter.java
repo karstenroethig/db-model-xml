@@ -61,11 +61,11 @@ public class SimpleDatatypeFormatter implements IFormatter<AbstractDatatype> {
 
         } else if( datatype.getType() == DatatypeEnum.DATETIME ) {
 
-            return "date";
+            return "datetime";
 
         } else if( datatype.getType() == DatatypeEnum.DATE ) {
 
-            return "datetime";
+            return "date";
 
         } else if( datatype.getType() == DatatypeEnum.TIMESTAMP ) {
 

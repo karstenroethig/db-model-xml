@@ -4,7 +4,10 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import karstenroethig.db.core.formatter.SimpleDatatypeFormatter;
+import karstenroethig.db.core.formatter.MssqlCreateTableFormatter;
+import karstenroethig.db.core.formatter.MssqlDropTablesFormatter;
+import karstenroethig.db.core.formatter.OracleCreateTableFormatter;
+import karstenroethig.db.core.formatter.OracleDropTablesFormatter;
 import karstenroethig.db.plugin.sql.SqlResourceLocator;
 
 import org.apache.maven.plugin.MojoExecutionException;
@@ -29,14 +32,30 @@ public class CreateSqlMojo extends AbstractCreateWithVelocityMojo {
     	super.execute();
 
         try {
-        	
-        	SimpleDatatypeFormatter datatypeFormatter = new SimpleDatatypeFormatter();
 
+        	/*
+        	 * MS SQL Server
+        	 */
             Map<String, Object> params = new HashMap<String, Object>();
 
-            params.put( "datatypeFormatter", datatypeFormatter );
+            params.put( "dropTablesFormatter", new MssqlDropTablesFormatter() );
+            params.put( "createTableFormatter", new MssqlCreateTableFormatter() );
+            params.put( "dbmsName", "MS SQL Server 2005" );
+            params.put( "specificLines", null );
 
-            evaluateFileWithVelocity( "mssql_create.sql", outputDirectory, null, null, params );
+            evaluateFileWithVelocity( "create.sql", outputDirectory, null, "mssql_create.sql", params );
+
+        	/*
+        	 * Oracle
+        	 */
+            params.clear();
+
+            params.put( "dropTablesFormatter", new OracleDropTablesFormatter() );
+            params.put( "createTableFormatter", new OracleCreateTableFormatter() );
+            params.put( "dbmsName", "Oracle" );
+            params.put( "specificLines", "alter session set nls_date_format = \"DD.MM.YYYY\";" );
+
+            evaluateFileWithVelocity( "create.sql", outputDirectory, null, "oracle_create.sql", params );
 
         } catch( Exception ex ) {
             throw new MojoExecutionException( "Error creating sql files", ex );
