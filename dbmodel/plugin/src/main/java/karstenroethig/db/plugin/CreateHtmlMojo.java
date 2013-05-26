@@ -58,6 +58,7 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
             copyFile( "print.png", outputDirectory, "resources", null );
             copyFile( "database.png", outputDirectory, "resources", null );
             copyFile( "consulting.png", outputDirectory, "resources", null );
+            copyFile( "search.png", outputDirectory, "resources", null );
             copyFile( "style.css", outputDirectory, "resources", null );
             
             if( withOverview ) {
@@ -67,6 +68,7 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
             	copyFile( "print.png", outputDirectory, targetSubDirectory, null );
                 copyFile( "database.png", outputDirectory, targetSubDirectory, null );
                 copyFile( "consulting.png", outputDirectory, targetSubDirectory, null );
+                copyFile( "search.png", outputDirectory, targetSubDirectory, null );
                 copyFile( "style.css", outputDirectory, targetSubDirectory, null );
             }
 
