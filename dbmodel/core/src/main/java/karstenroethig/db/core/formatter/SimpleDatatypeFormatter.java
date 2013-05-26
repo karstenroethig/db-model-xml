@@ -1,16 +1,9 @@
 package karstenroethig.db.core.formatter;
 
 import karstenroethig.db.core.dto.datatypes.AbstractDatatype;
-import karstenroethig.db.core.dto.datatypes.Bigint;
-import karstenroethig.db.core.dto.datatypes.Bit;
-import karstenroethig.db.core.dto.datatypes.Blob;
 import karstenroethig.db.core.dto.datatypes.Char;
 import karstenroethig.db.core.dto.datatypes.DatatypeEnum;
-import karstenroethig.db.core.dto.datatypes.Date;
-import karstenroethig.db.core.dto.datatypes.Datetime;
 import karstenroethig.db.core.dto.datatypes.Decimal;
-import karstenroethig.db.core.dto.datatypes.Int;
-import karstenroethig.db.core.dto.datatypes.Timestamp;
 import karstenroethig.db.core.dto.datatypes.Varchar;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,87 +11,71 @@ import org.apache.commons.lang3.StringUtils;
 public class SimpleDatatypeFormatter implements IFormatter<AbstractDatatype> {
 
 	@Override
-	public String format( AbstractDatatype datatype ) {
-		
-		if( datatype == null ) {
-			return StringUtils.EMPTY;
-		}
-		
-		if( datatype.getType() == DatatypeEnum.DECIMAL ) {
-			return formatDecimal( (Decimal)datatype );
-		} else if( datatype.getType() == DatatypeEnum.CHAR ) {
-			return formatChar( (Char)datatype );
-		} else if( datatype.getType() == DatatypeEnum.VARCHAR ) {
-			return formatVarchar( (Varchar)datatype );
-		} else if( datatype.getType() == DatatypeEnum.INT ) {
-			return formatInt( (Int)datatype );
-		} else if( datatype.getType() == DatatypeEnum.BIGINT ) {
-			return formatBigint( (Bigint)datatype );
-		} else if( datatype.getType() == DatatypeEnum.BIT ) {
-			return formatBit( (Bit)datatype );
-		} else if( datatype.getType() == DatatypeEnum.DATETIME ) {
-			return formatDatetime( (Datetime)datatype );
-		} else if( datatype.getType() == DatatypeEnum.DATE ) {
-			return formatDate( (Date)datatype );
-		} else if( datatype.getType() == DatatypeEnum.TIMESTAMP ) {
-			return formatTimestamp( (Timestamp)datatype );
-		} else if( datatype.getType() == DatatypeEnum.BLOB ) {
-			return formatBlob( (Blob)datatype );
-		}
-		
-		throw new IllegalArgumentException( "unknown datatype" );
-	}
-	
-	private String formatDecimal( Decimal datatype ) {
+    public String format( AbstractDatatype datatype ) {
 
-		StringBuffer desc = new StringBuffer();
-		
-		desc.append( "decimal(" );
-		desc.append( datatype.getPrecision() );
-		
-		if( datatype.getScale() > 0 ) {
-			desc.append( ", " );
-			desc.append( datatype.getScale() );
-		}
-		
-		desc.append( ")" );
-		
-		return desc.toString();
-	}
-	
-	private String formatChar( Char datatype ) {
-		return "char(" + datatype.getLength() + ")";
-	}
-	
-	private String formatVarchar( Varchar datatype ) {
-		return "varchar(" + datatype.getLength() + ")";
-	}
-	
-	private String formatInt( Int datatype ) {
-		return "int";
-	}
-	
-	private String formatBigint( Bigint datatype ) {
-		return "bigint";
-	}
-	
-	private String formatBit( Bit datatype ) {
-		return "bit";
-	}
-	
-	private String formatDatetime( Datetime datatype ) {
-		return "datetime";
-	}
-	
-	private String formatDate( Date datatype ) {
-		return "date";
-	}
-	
-	private String formatTimestamp( Timestamp datatype ) {
-		return "timestamp";
-	}
-	
-	private String formatBlob( Blob datatype ) {
-		return "image";
-	}
+        if( datatype == null ) {
+            return StringUtils.EMPTY;
+        }
+
+        if( datatype.getType() == DatatypeEnum.DECIMAL ) {
+
+            Decimal datatypeDecimal = ( Decimal )datatype;
+
+            StringBuffer desc = new StringBuffer();
+
+            desc.append( "decimal(" );
+            desc.append( datatypeDecimal.getPrecision() );
+
+            if( datatypeDecimal.getScale() > 0 ) {
+                desc.append( ", " );
+                desc.append( datatypeDecimal.getScale() );
+            }
+
+            desc.append( ")" );
+
+            return desc.toString();
+
+        } else if( datatype.getType() == DatatypeEnum.CHAR ) {
+
+            Char datatypeChar = ( Char )datatype;
+
+            return "char(" + datatypeChar.getLength() + ")";
+
+        } else if( datatype.getType() == DatatypeEnum.VARCHAR ) {
+
+            Varchar datatypeVarchar = ( Varchar )datatype;
+
+            return "varchar(" + datatypeVarchar.getLength() + ")";
+
+        } else if( datatype.getType() == DatatypeEnum.INT ) {
+
+            return "int";
+
+        } else if( datatype.getType() == DatatypeEnum.BIGINT ) {
+
+            return "bigint";
+
+        } else if( datatype.getType() == DatatypeEnum.BIT ) {
+
+            return "bit";
+
+        } else if( datatype.getType() == DatatypeEnum.DATETIME ) {
+
+            return "date";
+
+        } else if( datatype.getType() == DatatypeEnum.DATE ) {
+
+            return "datetime";
+
+        } else if( datatype.getType() == DatatypeEnum.TIMESTAMP ) {
+
+            return "timestamp";
+
+        } else if( datatype.getType() == DatatypeEnum.BLOB ) {
+
+            return "image";
+        }
+
+        throw new IllegalArgumentException( "unknown datatype" );
+    }
 }
