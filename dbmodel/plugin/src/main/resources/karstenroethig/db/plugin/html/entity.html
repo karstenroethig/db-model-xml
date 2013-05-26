@@ -21,7 +21,11 @@
 					<table width="100%" border="0" cellSpacing="0" cellPadding="0">
 						<tr>
 							<td class="title">
-								<a href="../index.html">Tabellen</a> &gt; ${entity.name}
+								#if( $withOverview )
+									<a href="../../index.html">Datenbank-Dokumentationen</a> &gt; <a href="../index.html">${database.name} ${database.version}</a> &gt; ${entity.name}
+								#else
+									<a href="../index.html">Tabellen</a> &gt; ${entity.name}
+								#end
 							</td>
 							<td class="symbol">
 								<a href="">

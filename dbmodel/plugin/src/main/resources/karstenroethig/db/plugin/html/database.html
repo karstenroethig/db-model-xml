@@ -21,7 +21,11 @@
 					<table width="100%" border="0" cellSpacing="0" cellPadding="0">
 						<tr>
 							<td class="title">
-								Tabellen
+								#if( $withOverview )
+									<a href="../index.html">Datenbank-Dokumentationen</a> &gt; ${database.name} ${database.version}
+								#else
+									Tabellen
+								#end
 							</td>
 							<td class="symbol">
 								<a href="">
