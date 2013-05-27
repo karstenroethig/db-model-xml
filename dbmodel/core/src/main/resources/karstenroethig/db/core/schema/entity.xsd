@@ -30,6 +30,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element ref="datatype" maxOccurs="1" minOccurs="1"/>
+				<xsd:element ref="identity" maxOccurs="1" minOccurs="0"/>
 				<xsd:element name="description" maxOccurs="1" minOccurs="1" type="xsd:string"/>
 				<xsd:element ref="properties" maxOccurs="1" minOccurs="0"/>
 			</xsd:sequence>
@@ -51,6 +52,16 @@
 			<xsd:attribute name="scale" type="xsd:integer" use="optional"/>
 			<!-- char | varchar -> length -->
 			<xsd:attribute name="length" type="xsd:integer" use="optional"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Identitätsspezifkation -->
+	<xsd:element name="identity">
+		<xsd:complexType>
+			<!-- seed (Startwert) -->
+			<xsd:attribute name="seed" type="xsd:integer" use="optional"/>
+			<!-- increment (Schrittweite) -->
+			<xsd:attribute name="increment" type="xsd:integer" use="optional"/>
 		</xsd:complexType>
 	</xsd:element>
 	

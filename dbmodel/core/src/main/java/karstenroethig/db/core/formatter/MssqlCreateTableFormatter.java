@@ -6,6 +6,7 @@ import java.util.Set;
 
 import karstenroethig.db.core.dto.Attribute;
 import karstenroethig.db.core.dto.Entity;
+import karstenroethig.db.core.dto.Identity;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -58,6 +59,29 @@ public class MssqlCreateTableFormatter implements IFormatter<Entity> {
 			
 			line += " ";
 			line += datatypeFormatter.format( attribute.getDatatype() );
+			
+			attributeLines.put( attribute, line );
+		}
+		
+		rightPadToMax();
+		
+		/*
+		 * Identity
+		 */
+		for( Attribute attribute : entity.getAttributes() ) {
+			
+			if( !attribute.hasIdentity() ) {
+				continue;
+			}
+			
+			Identity identity = attribute.getIdentity();
+			String line = attributeLines.get( attribute );
+			
+			line += " identity(";
+			line += identity.getSeed();
+			line += ",";
+			line += identity.getIncrement();
+			line += ")";
 			
 			attributeLines.put( attribute, line );
 		}

@@ -8,6 +8,7 @@
 
         <attribute name="id" primaryKey="true" nullable="false">
             <datatype type="bigint"/>
+            <identity seed="1" increment="1"/>
             <description>TODO
 Document
 me!

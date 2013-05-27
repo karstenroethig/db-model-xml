@@ -6,6 +6,7 @@ import java.util.Set;
 
 import karstenroethig.db.core.dto.Attribute;
 import karstenroethig.db.core.dto.Entity;
+import karstenroethig.db.core.dto.Identity;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -65,6 +66,24 @@ public class MysqlCreateTableFormatter implements IFormatter<Entity> {
 		rightPadToMax();
 		
 		/*
+		 * Nullable
+		 */
+		for( Attribute attribute : entity.getAttributes() ) {
+			
+			String line = attributeLines.get( attribute );
+			
+			if( attribute.isNullable() ) {
+				line += " null";
+			} else {
+				line += " not null";
+			}
+			
+			attributeLines.put( attribute, line );
+		}
+		
+		rightPadToMax();
+		
+		/*
 		 * Default value
 		 */
 		DefaultValueFormatter defaultValueFormatter = new DefaultValueFormatter();
@@ -87,17 +106,17 @@ public class MysqlCreateTableFormatter implements IFormatter<Entity> {
 		rightPadToMax();
 		
 		/*
-		 * Nullable
+		 * Identity
 		 */
 		for( Attribute attribute : entity.getAttributes() ) {
 			
+			if( !attribute.hasIdentity() ) {
+				continue;
+			}
+
 			String line = attributeLines.get( attribute );
 			
-			if( attribute.isNullable() ) {
-				line += " null";
-			} else {
-				line += " not null";
-			}
+			line += " auto_increment";
 			
 			attributeLines.put( attribute, line );
 		}
@@ -119,7 +138,8 @@ public class MysqlCreateTableFormatter implements IFormatter<Entity> {
 				sql.append( ",\n" );
 			}
 			
-			sql.append( attributeLines.get( attribute ) );
+			sql.append( "    " );
+			sql.append( StringUtils.trim( attributeLines.get( attribute ) ) );
 		}
 		
 		if( hasPrimaryKey ) {

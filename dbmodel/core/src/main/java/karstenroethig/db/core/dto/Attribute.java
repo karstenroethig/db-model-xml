@@ -19,6 +19,8 @@ public class Attribute {
 	
 	private AbstractDatatype datatype;
 	
+	private Identity identity;
+	
 	public Attribute() {
 		this.name = StringUtils.EMPTY;
 		this.primaryKey = false;
@@ -28,6 +30,8 @@ public class Attribute {
 		this.properties = new HashMap<String, String>();
 		
 		this.datatype = null;
+		
+		this.identity = null;
 	}
 
 	public String getName() {
@@ -97,8 +101,20 @@ public class Attribute {
 		return datatype;
 	}
 
-	public void setDatatype(AbstractDatatype datatype) {
+	public void setDatatype( AbstractDatatype datatype ) {
 		this.datatype = datatype;
+	}
+	
+	public boolean hasIdentity() {
+		return identity != null;
+	}
+
+	public Identity getIdentity() {
+		return identity;
+	}
+
+	public void setIdentity( Identity identity ) {
+		this.identity = identity;
 	}
 	
 }

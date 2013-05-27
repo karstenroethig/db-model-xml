@@ -10,6 +10,7 @@ import java.util.Set;
 import karstenroethig.db.core.dto.Attribute;
 import karstenroethig.db.core.dto.Database;
 import karstenroethig.db.core.dto.Entity;
+import karstenroethig.db.core.dto.Identity;
 import karstenroethig.db.core.dto.associations.AbstractAssociation;
 import karstenroethig.db.core.dto.associations.AssociationTypeEnum;
 import karstenroethig.db.core.dto.associations.JoinColumn;
@@ -212,7 +213,7 @@ public class Transformer {
 			attribute.setNullable( jaxbAttribute.isNullable() );
 		}
 		
-		// Datentyp
+		// Datatype
 		karstenroethig.db.core.jaxb.entity.Datatype jaxbDatatype = jaxbAttribute.getDatatype();
 		
 		if( jaxbDatatype != null ) {
@@ -222,6 +223,24 @@ public class Transformer {
 			if( datatype != null ) {
 				attribute.setDatatype( datatype );
 			}
+		}
+		
+		// Identity
+		karstenroethig.db.core.jaxb.entity.Identity jaxbIdentity = jaxbAttribute.getIdentity();
+		
+		if( jaxbIdentity != null ) {
+			
+			Identity identity = new Identity();
+			
+			if( jaxbIdentity.getSeed() != null ) {
+				identity.setSeed( jaxbIdentity.getSeed().intValue() );
+			}
+			
+			if( jaxbIdentity.getIncrement() != null ) {
+				identity.setIncrement( jaxbIdentity.getIncrement().intValue() );
+			}
+			
+			attribute.setIdentity( identity );
 		}
 		
 		// Properties
@@ -745,6 +764,19 @@ public class Transformer {
 					}
 					
 					jaxbAttribute.setDatatype( jaxbDatatype );
+
+					// Identity
+					if( attribute.hasIdentity() ) {
+						
+						Identity identity = attribute.getIdentity();
+						
+						karstenroethig.db.core.jaxb.entity.Identity jaxbIdentity = jaxbObjectFactory.createIdentity();
+						
+						jaxbIdentity.setSeed( new BigInteger( identity.getSeed() + StringUtils.EMPTY ) );
+						jaxbIdentity.setIncrement( new BigInteger( identity.getIncrement() + StringUtils.EMPTY ) );
+						
+						jaxbAttribute.setIdentity( jaxbIdentity );
+					}
 					
 					jaxbAttributes.getAttribute().add( jaxbAttribute );
 					

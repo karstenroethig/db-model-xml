@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import karstenroethig.db.core.dto.Attribute;
+import karstenroethig.db.core.dto.Database;
 import karstenroethig.db.core.dto.Entity;
 
 import org.apache.commons.lang3.StringUtils;
@@ -131,7 +132,66 @@ public class OracleCreateTableFormatter implements IFormatter<Entity> {
 		sql.append( ")\n" );
 		sql.append( "commit;" );
 		
+		String sequences = formatForSequences( entity );
+		
+		if( sequences != null ) {
+			sql.append( "\n\n" );
+			sql.append( sequences );
+		}
+		
 		return sql.toString();
+	}
+	
+	private String formatForSequences( Entity entity ) {
+		
+		Attribute identityAttribute = null;
+		
+		for( Attribute attribute : entity.getAttributes() ) {
+			
+			if( attribute.hasIdentity() ) {
+				identityAttribute = attribute;
+			}
+		}
+		
+		if( identityAttribute == null ) {
+			return null;
+		}
+		
+		StringBuffer seq = new StringBuffer();
+		
+		/*
+		 * Sequence
+		 */
+		String sequenceName = "seq_" + entity.getName() + "_" + identityAttribute.getName();
+		
+		seq.append( "create sequence " );
+		seq.append( sequenceName );
+		seq.append( " start with " );
+		seq.append( identityAttribute.getIdentity().getSeed() );
+		seq.append( " increment by " );
+		seq.append( identityAttribute.getIdentity().getIncrement() );
+		seq.append( ";\ncommit;\n\n" );
+		
+		/*
+		 * Trigger
+		 */
+		seq.append( "create or replace trigger tpk_" );
+		seq.append( entity.getName() );
+		seq.append( "_" );
+		seq.append( identityAttribute.getName() );
+		seq.append( " before insert on " );
+		seq.append( entity.getName() );
+		seq.append( "\n" );
+		seq.append( "for each row\n" );
+		seq.append( "begin\n" );
+		seq.append( "  if :new." + identityAttribute.getName() + " is null then\n" );
+		seq.append( "    select " +sequenceName + ".nextval into :new." + identityAttribute.getName() + " from dual;\n" );
+		seq.append( "  end if;\n" );
+		seq.append( "end;\n" );
+		seq.append( "/\n" );
+		seq.append( "commit;" );
+		
+		return seq.toString();
 	}
 	
 	private void rightPadToMax() {
