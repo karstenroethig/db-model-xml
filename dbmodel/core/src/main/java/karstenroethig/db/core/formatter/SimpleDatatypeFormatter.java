@@ -73,7 +73,7 @@ public class SimpleDatatypeFormatter implements IFormatter<AbstractDatatype> {
 
         } else if( datatype.getType() == DatatypeEnum.BLOB ) {
 
-            return "image";
+            return "blob";
         }
 
         throw new IllegalArgumentException( "unknown datatype" );

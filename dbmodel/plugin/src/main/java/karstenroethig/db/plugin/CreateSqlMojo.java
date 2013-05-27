@@ -6,6 +6,8 @@ import java.util.Map;
 
 import karstenroethig.db.core.formatter.MssqlCreateTableFormatter;
 import karstenroethig.db.core.formatter.MssqlDropTablesFormatter;
+import karstenroethig.db.core.formatter.MysqlCreateTableFormatter;
+import karstenroethig.db.core.formatter.MysqlDropTablesFormatter;
 import karstenroethig.db.core.formatter.OracleCreateTableFormatter;
 import karstenroethig.db.core.formatter.OracleDropTablesFormatter;
 import karstenroethig.db.plugin.sql.SqlResourceLocator;
@@ -50,12 +52,29 @@ public class CreateSqlMojo extends AbstractCreateWithVelocityMojo {
         	 */
             params.clear();
 
+            StringBuffer specificLines = new StringBuffer();
+            
+            specificLines.append( "alter session set current_schema = &1.;\n" );
+            specificLines.append( "alter session set nls_date_format = \"DD.MM.YYYY\";" );
+            
             params.put( "dropTablesFormatter", new OracleDropTablesFormatter() );
             params.put( "createTableFormatter", new OracleCreateTableFormatter() );
             params.put( "dbmsName", "Oracle" );
-            params.put( "specificLines", "alter session set nls_date_format = \"DD.MM.YYYY\";" );
+            params.put( "specificLines", specificLines.toString() );
 
             evaluateFileWithVelocity( "create.sql", outputDirectory, null, "oracle_create.sql", params );
+
+        	/*
+        	 * MySQL
+        	 */
+            params.clear();
+
+            params.put( "dropTablesFormatter", new MysqlDropTablesFormatter() );
+            params.put( "createTableFormatter", new MysqlCreateTableFormatter() );
+            params.put( "dbmsName", "MySQL" );
+            params.put( "specificLines", null );
+
+            evaluateFileWithVelocity( "create.sql", outputDirectory, null, "mysql_create.sql", params );
 
         } catch( Exception ex ) {
             throw new MojoExecutionException( "Error creating sql files", ex );

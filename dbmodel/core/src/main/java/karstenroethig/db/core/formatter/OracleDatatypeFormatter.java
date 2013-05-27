@@ -14,8 +14,6 @@ public class OracleDatatypeFormatter extends SimpleDatatypeFormatter {
         if( datatype == null ) {
             return StringUtils.EMPTY;
         }
-        
-        // FIXME check bigint and correct it
 
         if( datatype.getType() == DatatypeEnum.VARCHAR ) {
 
@@ -31,8 +29,11 @@ public class OracleDatatypeFormatter extends SimpleDatatypeFormatter {
 
             return "datetime";
 
-        }
+        } else if( datatype.getType() == DatatypeEnum.BLOB ) {
 
-        throw new IllegalArgumentException( "unknown datatype" );
+            return "image";
+        }
+        
+        return super.format( datatype );
     }
 }

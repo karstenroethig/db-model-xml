@@ -22,6 +22,9 @@ public class MssqlDatatypeFormatter extends SimpleDatatypeFormatter {
 
             return "datetime";
 
+        } else if( datatype.getType() == DatatypeEnum.BLOB ) {
+
+            return "image";
         }
         
         return super.format( datatype );

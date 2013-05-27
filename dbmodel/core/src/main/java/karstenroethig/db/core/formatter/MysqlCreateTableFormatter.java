@@ -9,7 +9,7 @@ import karstenroethig.db.core.dto.Entity;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class OracleCreateTableFormatter implements IFormatter<Entity> {
+public class MysqlCreateTableFormatter implements IFormatter<Entity> {
 	
 	private Map<Attribute, String> attributeLines = new HashMap<Attribute, String>();
 
@@ -19,7 +19,7 @@ public class OracleCreateTableFormatter implements IFormatter<Entity> {
 		attributeLines.clear();
 		
 		boolean hasPrimaryKey = false;
-		String primaryKey = "    constraint PK_" + entity.getName() + " primary key( ";
+		String primaryKey = "    primary key( ";
 		
 		/*
 		 * Name + Primary key
@@ -50,7 +50,7 @@ public class OracleCreateTableFormatter implements IFormatter<Entity> {
 		/*
 		 * Datatype
 		 */
-		OracleDatatypeFormatter datatypeFormatter = new OracleDatatypeFormatter();
+		SimpleDatatypeFormatter datatypeFormatter = new SimpleDatatypeFormatter();
 		
 		for( Attribute attribute : entity.getAttributes() ) {
 			
@@ -128,8 +128,7 @@ public class OracleCreateTableFormatter implements IFormatter<Entity> {
 		}
 		
 		sql.append( "\n" );
-		sql.append( ")\n" );
-		sql.append( "commit;" );
+		sql.append( ");" );
 		
 		return sql.toString();
 	}
