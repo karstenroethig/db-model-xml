@@ -40,7 +40,7 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
 
     	super.execute();
     	
-    	Database database = getDatebase();
+    	Database database = getDatabase();
 
         getLog().info( "creating 'single'" );
         createHtml( database, new File( outputDirectory, "single"), false );

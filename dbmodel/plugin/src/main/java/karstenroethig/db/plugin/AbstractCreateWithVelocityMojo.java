@@ -196,7 +196,7 @@ public abstract class AbstractCreateWithVelocityMojo extends AbstractMojo {
     	return params;
     }
     
-    protected Database getDatebase() {
+    protected Database getDatabase() {
     	return database;
     }
     
