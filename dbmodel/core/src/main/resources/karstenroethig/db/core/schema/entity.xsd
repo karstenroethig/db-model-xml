@@ -6,10 +6,10 @@
 	<xsd:element name="entity">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="description" maxOccurs="1" minOccurs="0" type="xsd:string"/>
-				<xsd:element ref="properties" maxOccurs="1" minOccurs="0"/>
-				<xsd:element ref="attributes" maxOccurs="1" minOccurs="0"/>
-				<xsd:element ref="relationships" maxOccurs="1" minOccurs="0"/>
+				<xsd:element name="description" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+				<xsd:element ref="properties" minOccurs="0" maxOccurs="1"/>
+				<xsd:element ref="attributes" minOccurs="0" maxOccurs="1"/>
+				<xsd:element ref="relationships" minOccurs="0" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="name" type="xsd:string" use="required"/>
 			<xsd:attribute name="extends" type="xsd:string" use="optional"/>
@@ -20,7 +20,7 @@
 	<xsd:element name="attributes">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="attribute" maxOccurs="unbounded" minOccurs="1"/>
+				<xsd:element ref="attribute" minOccurs="1" maxOccurs="unbounded"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -29,10 +29,10 @@
 	<xsd:element name="attribute">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="datatype" maxOccurs="1" minOccurs="1"/>
-				<xsd:element ref="identity" maxOccurs="1" minOccurs="0"/>
-				<xsd:element name="description" maxOccurs="1" minOccurs="1" type="xsd:string"/>
-				<xsd:element ref="properties" maxOccurs="1" minOccurs="0"/>
+				<xsd:element ref="datatype" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="identity" minOccurs="0" maxOccurs="1"/>
+				<xsd:element name="description" minOccurs="1" maxOccurs="1" type="xsd:string"/>
+				<xsd:element ref="properties" minOccurs="0" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="name" type="xsd:string" use="required"/>
 			<xsd:attribute name="primaryKey" type="xsd:boolean" use="optional"/>
@@ -69,7 +69,7 @@
 	<xsd:element name="properties">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="property" maxOccurs="unbounded" minOccurs="1"/>
+				<xsd:element ref="property" minOccurs="1" maxOccurs="unbounded"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -86,9 +86,9 @@
 	<xsd:element name="relationships">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="oneToOne" maxOccurs="unbounded" minOccurs="0"/>
-				<xsd:element ref="oneToMany" maxOccurs="unbounded" minOccurs="0"/>
-				<xsd:element ref="manyToOne" maxOccurs="unbounded" minOccurs="0"/>
+				<xsd:element ref="oneToOne" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="oneToMany" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element ref="manyToOne" minOccurs="0" maxOccurs="unbounded"/>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
@@ -97,7 +97,7 @@
 	<xsd:element name="oneToOne">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="joinColumn" maxOccurs="unbounded" minOccurs="1"/>
+				<xsd:element ref="joinColumn" minOccurs="1" maxOccurs="unbounded"/>
 			</xsd:sequence>
 			<xsd:attribute name="targetEntity" type="xsd:string" use="required"/>
 		</xsd:complexType>
@@ -107,7 +107,7 @@
 	<xsd:element name="oneToMany">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="joinColumn" maxOccurs="unbounded" minOccurs="1"/>
+				<xsd:element ref="joinColumn" minOccurs="1" maxOccurs="unbounded"/>
 			</xsd:sequence>
 			<xsd:attribute name="targetEntity" type="xsd:string" use="required"/>
 		</xsd:complexType>
@@ -117,7 +117,7 @@
 	<xsd:element name="manyToOne">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="joinColumn" maxOccurs="unbounded" minOccurs="1"/>
+				<xsd:element ref="joinColumn" minOccurs="1" maxOccurs="unbounded"/>
 			</xsd:sequence>
 			<xsd:attribute name="targetEntity" type="xsd:string" use="required"/>
 		</xsd:complexType>
