@@ -8,11 +8,10 @@
 			<xsd:sequence>
 				<xsd:element name="description" minOccurs="0" maxOccurs="1" type="xsd:string"/>
 				<xsd:element ref="properties" minOccurs="0" maxOccurs="1"/>
-				<xsd:element ref="attributes" minOccurs="0" maxOccurs="1"/>
+				<xsd:element ref="attributes" minOccurs="1" maxOccurs="1"/>
 				<xsd:element ref="relationships" minOccurs="0" maxOccurs="1"/>
 			</xsd:sequence>
 			<xsd:attribute name="name" type="xsd:string" use="required"/>
-			<xsd:attribute name="extends" type="xsd:string" use="optional"/>
 		</xsd:complexType>
 	</xsd:element>
 	
