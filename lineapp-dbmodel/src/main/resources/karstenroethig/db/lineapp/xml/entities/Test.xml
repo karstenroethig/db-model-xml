@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
-<entity name="PropertyNumber">
+<entity name="Test">
 
     <description>TODO Document me!</description>
 
@@ -9,12 +9,76 @@
         <attribute name="id" primaryKey="true" nullable="false">
             <datatype type="bigint"/>
             <identity seed="1" increment="1"/>
-            <description>TODO Document me!</description>
+            <description>TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!</description>
         </attribute>
 
-        <attribute name="version" primaryKey="false" nullable="false">
+        <attribute name="version" primaryKey="false" nullable="true">
             <datatype type="bigint"/>
-            <description>TODO Document me!</description>
+            <description>TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!
+TODO
+Document
+me!</description>
         </attribute>
 
         <attribute name="property_key" primaryKey="false" nullable="false">

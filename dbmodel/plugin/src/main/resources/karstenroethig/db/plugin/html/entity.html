@@ -62,8 +62,9 @@
 					<img class="contract" onclick="expandAll();" align="absMiddle" src="../resources/plus.png" border="0" hspace="2" complete="complete"/>
 				</th>
 				<th>Attribut</th>
-				<th>PK</th>
 				<th>Datentyp</th>
+				<th title="Primary Key">PK</th>
+				<th title="NULL zugelassen">NULL</th>
 				<th>Beschreibung</th>
 				#foreach( $attributePropertyKey in $attributePropertyKeys )
 					<th>${attributePropertyKey}</th>
@@ -82,14 +83,21 @@
 					<td class="nowrap" title="Attribut">
 						<a class="anchor" name="${attribute.name}">${attribute.name}</a>
 					</td>
-					<td class="center" title="PK">
+					<td class="nowrap" title="Datentyp">${datatypeFormatter.format( $attribute.datatype )}</td>
+					<td class="center" title="Primary Key">
 						#if( $attribute.primaryKey )
 							x
 						#else
 							&nbsp;
 						#end
 					</td>
-					<td class="nowrap" title="Datentyp">${datatypeFormatter.format( $attribute.datatype )}</td>
+					<td class="center" title="NULL zugelassen">
+						#if( $attribute.nullable )
+							x
+						#else
+							&nbsp;
+						#end
+					</td>
 					<td title="Beschreibung">
 						<div id="desc_expand_${attribute.name}" class="expand">${textUtils.plainTextToHtml( $attribute.description )}</div>
 						<div id="desc_contract_${attribute.name}" class="contract">${textUtils.plainTextToHtml( $textUtils.shorten( $attribute.description, 25 ) )}</div>
