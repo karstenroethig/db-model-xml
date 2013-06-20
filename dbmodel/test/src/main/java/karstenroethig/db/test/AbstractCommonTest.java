@@ -1,21 +1,21 @@
 package karstenroethig.db.test;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import junit.framework.TestCase;
 import karstenroethig.db.core.DatabaseModel;
 import karstenroethig.db.core.dto.Database;
 import karstenroethig.db.core.locator.AbstractDatabaseLocator;
 import karstenroethig.db.test.validation.IValidator;
 import karstenroethig.db.test.validation.ValidationMessage;
 import karstenroethig.db.test.validation.ValidationResult;
+import karstenroethig.db.test.validators.IdentityValidator;
 import karstenroethig.db.test.validators.UniqueAttributePerEntityValidator;
 import karstenroethig.db.test.validators.XmlSchemaValidator;
 
-import junit.framework.TestCase;
-
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 
 public abstract class AbstractCommonTest extends TestCase {
@@ -26,6 +26,7 @@ public abstract class AbstractCommonTest extends TestCase {
 
         validators.add( new XmlSchemaValidator( getDatabaseLocator() ) );
         validators.add( new UniqueAttributePerEntityValidator( database ) );
+        validators.add( new IdentityValidator( database ) );
 
         return validators;
     }
