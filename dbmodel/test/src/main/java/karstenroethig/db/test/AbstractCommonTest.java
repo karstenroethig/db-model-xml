@@ -13,6 +13,7 @@ import karstenroethig.db.test.validation.ValidationMessage;
 import karstenroethig.db.test.validation.ValidationResult;
 import karstenroethig.db.test.validators.AttributeUniquePerEntityValidator;
 import karstenroethig.db.test.validators.IdentityValidator;
+import karstenroethig.db.test.validators.PrimaryKeyRequiredValidator;
 import karstenroethig.db.test.validators.XmlSchemaValidator;
 
 import org.junit.Test;
@@ -32,7 +33,12 @@ public abstract class AbstractCommonTest extends TestCase {
     }
 
     protected Collection<IValidator> getWarningValidators( Database database ) {
-        return new ArrayList<IValidator>();
+
+        List<IValidator> validators = new ArrayList<IValidator>();
+
+        validators.add( new PrimaryKeyRequiredValidator( database ) );
+
+        return validators;
     }
 
     @Test
