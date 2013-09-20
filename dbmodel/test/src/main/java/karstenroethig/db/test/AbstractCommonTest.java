@@ -11,8 +11,8 @@ import karstenroethig.db.core.locator.AbstractDatabaseLocator;
 import karstenroethig.db.test.validation.IValidator;
 import karstenroethig.db.test.validation.ValidationMessage;
 import karstenroethig.db.test.validation.ValidationResult;
+import karstenroethig.db.test.validators.AttributeUniquePerEntityValidator;
 import karstenroethig.db.test.validators.IdentityValidator;
-import karstenroethig.db.test.validators.UniqueAttributePerEntityValidator;
 import karstenroethig.db.test.validators.XmlSchemaValidator;
 
 import org.junit.Test;
@@ -25,7 +25,7 @@ public abstract class AbstractCommonTest extends TestCase {
         List<IValidator> validators = new ArrayList<IValidator>();
 
         validators.add( new XmlSchemaValidator( getDatabaseLocator() ) );
-        validators.add( new UniqueAttributePerEntityValidator( database ) );
+        validators.add( new AttributeUniquePerEntityValidator( database ) );
         validators.add( new IdentityValidator( database ) );
 
         return validators;

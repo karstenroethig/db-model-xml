@@ -15,9 +15,9 @@ import java.util.Set;
 /**
  * Prüfung: Der Attribut-Name darf nur einmal pro Entität vorkommen.
  */
-public class UniqueAttributePerEntityValidator extends AbstractDatabaseModelValidator {
+public class AttributeUniquePerEntityValidator extends AbstractDatabaseModelValidator {
 
-    public UniqueAttributePerEntityValidator( Database database ) {
+    public AttributeUniquePerEntityValidator( Database database ) {
         super( database );
     }
 
