@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 import karstenroethig.db.core.dto.Attribute;
-import karstenroethig.db.core.dto.Database;
 import karstenroethig.db.core.dto.Entity;
 
 import org.apache.commons.lang3.StringUtils;

@@ -48,6 +48,9 @@
 				<td title="Name">${database.name}</td>
 				<td title="Version">
 					<a href="${artifactVersion}/index.html">${database.version}</a>
+					#if( $withChangelog )
+						(<a href="${artifactVersion}/changelog.html">Diff</a>)
+					#end
 				</td>
 			</tr>
 		</table>

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<title>${database.name} ${database.version} &gt; &Auml;nderungs&uuml;bersicht</title>
+		<link rel="stylesheet" href="resources/style.css" type="text/css"/>
+	</head>
+	<body>
+		<table class="header" width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr class="header1">
+				<td>
+					<div>
+						<img align="absMiddle" src="resources/database.png" vspace="4" hspace="4" complete="complete"/>
+						${database.name} ${database.version}
+					</div>
+				</td>
+			</tr>
+			<tr class="header2">
+				<td>
+					<table width="100%" border="0" cellSpacing="0" cellPadding="0">
+						<tr>
+							<td class="title">
+								#if( $withOverview )
+									<a href="../index.html">Datenbank-Dokumentationen</a> &gt; <a href="index.html">${database.name} ${database.version}</a> &gt; &Auml;nderungs&uuml;bersicht
+								#else
+									<a href="index.html">Tabellen</a> &gt; &Auml;nderungs&uuml;bersicht
+								#end
+							</td>
+							<td class="symbol">
+								<a href="">
+									<img align="absMiddle" src="resources/search.png" border="0" hspace="2" complete="complete"/>
+								</a>
+							</td>
+							<td class="symbol">
+								<a href="">
+									<img align="absMiddle" src="resources/consulting.png" border="0" hspace="2" complete="complete"/>
+								</a>
+							</td>
+							<td class="symbol">
+								<a href="javascript:window.print();">
+									<img align="absMiddle" src="resources/print.png" border="0" hspace="2" complete="complete"/>
+								</a>
+							</td>
+							<td class="date">${createDateStr}</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<h1>&Auml;nderungen von Version ${changelog.versionOld} zu Version ${changelog.versionNew}</h1>
+		#foreach( $entityChangelog in $changelog.entityChangelogs )
+			<h2>${entityChangelog.entityName}</h2>
+			#if( ${stringUtils.isNotBlank( $entityChangelog.text )} )
+				<p>${textUtils.plainTextToHtml( $entityChangelog.text )}</p>
+			#else
+				<table class="entity" cellpadding="0" cellspacing="0" style="width: 99%;">
+					<thead>
+						<th style="width: 15%;">Attribut</th>
+						<th style="width: 15%;">Eigenschaft</th>
+						<th style="width: 35%;">Alt</th>
+						<th style="width: 35%;">Neu</th>
+					</thead>
+					#foreach( $entityChange in $entityChangelog.entityChanges )
+						<tr>
+							<td title="Attribut">
+								#if( ${stringUtils.isBlank( $entityChange.entityAttributeName )} )
+									&nbsp;
+								#else
+									${entityChange.entityAttributeName}
+								#end
+							</td>
+							<td title="Eigenschaft">
+								#if( ${stringUtils.isBlank( $entityChange.xmlAttributeName )} )
+									&nbsp;
+								#else
+									${textUtils.plainTextToHtml( $entityChange.xmlAttributeName )}
+								#end
+							</td>
+							#if( ${stringUtils.isNotBlank( $entityChange.text )} )
+								<td title="Alt - Neu" colspan="2" class="center">${textUtils.plainTextToHtml( $entityChange.text )}</td>
+							#else
+								<td title="Alt">
+									#if( ${entityChange.hasDiffDetails()} )
+										${textUtils.diffsToHtml( $entityChange.diffDetails, true )}
+									#else
+										#if( ${stringUtils.isBlank( $entityChange.oldValue )} )
+											&nbsp;
+										#else
+											${textUtils.plainTextToHtml( $entityChange.oldValue )}
+										#end
+									#end
+								</td>
+								<td title="Neu">
+									#if( ${entityChange.hasDiffDetails()} )
+										${textUtils.diffsToHtml( $entityChange.diffDetails, false )}
+									#else
+										#if( ${stringUtils.isBlank( $entityChange.newValue )} )
+											&nbsp;
+										#else
+											${textUtils.plainTextToHtml( $entityChange.newValue )}
+										#end
+									#end
+								</td>
+							#end
+						</tr>
+					#end
+				</table>
+			#end
+		#end
+	</body>
+</html>

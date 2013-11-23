@@ -8,12 +8,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import karstenroethig.db.core.ChangelogModel;
+import karstenroethig.db.core.DatabaseModel;
 import karstenroethig.db.core.dto.Attribute;
 import karstenroethig.db.core.dto.Database;
 import karstenroethig.db.core.dto.Entity;
+import karstenroethig.db.core.dto.changelog.Changelog;
 import karstenroethig.db.core.formatter.SimpleDatatypeFormatter;
 import karstenroethig.db.plugin.html.HtmlResourceLocator;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -33,6 +37,17 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
 		defaultValue = "${project.artifactId}"
 	)
 	private String artifactId;
+	
+	@Parameter(
+		defaultValue = "false"
+	)
+	private Boolean createChangelog;
+	
+	@Parameter
+	private String changelogSrcVersion;
+	
+	@Parameter
+	private File changelogSrcDirectory;
 
     private ResourceLocator resourceLocator = new HtmlResourceLocator();
 
@@ -41,15 +56,17 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
     	super.execute();
     	
     	Database database = getDatabase();
+    	
+    	Changelog changelog = createChangelog();
 
         getLog().info( "creating 'single'" );
-        createHtml( database, new File( outputDirectory, "single"), false );
+        createHtml( database, changelog, new File( outputDirectory, "single"), false );
         
         getLog().info( "creating 'overview'" );
-        createHtml( database, new File( outputDirectory, "overview"), true );
+        createHtml( database, changelog, new File( outputDirectory, "overview"), true );
     }
     
-    private void createHtml( Database database, File outputDirectory, boolean withOverview ) throws MojoExecutionException {
+    private void createHtml( Database database, Changelog changelog, File outputDirectory, boolean withOverview ) throws MojoExecutionException {
     	
     	String artifactVersion = artifactId + "-" + database.getVersion();
     	
@@ -94,6 +111,7 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
         		Map<String, Object> overviewParams = new HashMap<String, Object>();
 
         		overviewParams.put( "artifactVersion", artifactVersion );
+        		overviewParams.put( "withChangelog", changelog != null );
 
                 evaluateFileWithVelocity( "overview.html", outputDirectory, null, "index.html", overviewParams );
     		}
@@ -172,10 +190,60 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
             targetSubDirectory = withOverview ? artifactVersion : null;
 
             evaluateFileWithVelocity( "search.html", outputDirectory, targetSubDirectory, null, searchParams );
+            
+            /*
+             * Changelog
+             */
+            if( changelog != null ) {
+
+                Map<String, Object> changelogParams = new HashMap<String, Object>();
+
+                changelogParams.put( "withOverview", withOverview );
+                changelogParams.put( "changelog", changelog );
+                
+                targetSubDirectory = withOverview ? artifactVersion : null;
+
+                evaluateFileWithVelocity( "changelog.html", outputDirectory, targetSubDirectory, null, changelogParams );
+            }
     		
     	} catch( Exception ex ) {
             throw new MojoExecutionException( "Error creating files", ex );
         }
+    }
+    
+    private Changelog createChangelog() throws MojoExecutionException {
+    	
+    	if( getCreateChangelog() == null || getCreateChangelog().equals( Boolean.FALSE ) ) {
+    		return null;
+    	}
+    	
+    	if( StringUtils.isBlank( getChangelogSrcVersion() ) ) {
+    		throw new MojoExecutionException( "Parameter 'changelogSrcVersion' cannot be empty" );
+    	}
+    	
+    	File changelogSrcDir = getChangelogSrcDirectory();
+    	
+    	if( changelogSrcDir == null ) {
+    		throw new MojoExecutionException( "Parameter 'changelogSrcDirectory' cannot be empty" );
+    	} else if( changelogSrcDir.exists() == false || changelogSrcDir.isDirectory() == false ) {
+    		throw new MojoExecutionException( "Parameter 'changelogSrcDirectory' has to be a directory" );
+    	}
+    	
+    	File changelogSrcFileDatabase = new File( changelogSrcDir, "database.xml" );
+    	
+    	if( changelogSrcFileDatabase.exists() == false || changelogSrcFileDatabase.isDirectory() ) {
+    		throw new MojoExecutionException( "File " + changelogSrcFileDatabase.getAbsolutePath() + " does not exist" );
+    	}
+    	
+    	File changelogSrcDirEntities = new File( changelogSrcDir, "entities" );
+    	
+    	if( changelogSrcDirEntities.exists() == false || changelogSrcDirEntities.isDirectory() == false ) {
+    		throw new MojoExecutionException( "Directory " + changelogSrcDirEntities.getAbsolutePath() + " does not exist" );
+    	}
+    	
+    	Database databaseOld = DatabaseModel.loadDatabaseModel( changelogSrcFileDatabase );
+    	
+    	return ChangelogModel.generateChangelog( databaseOld, getDatabase() );
     }
     
     @Override
@@ -187,4 +255,16 @@ public class CreateHtmlMojo extends AbstractCreateWithVelocityMojo {
     protected File getOutputDirectory() {
         return outputDirectory;
     }
+
+	protected Boolean getCreateChangelog() {
+		return createChangelog;
+	}
+
+	protected String getChangelogSrcVersion() {
+		return changelogSrcVersion;
+	}
+
+	protected File getChangelogSrcDirectory() {
+		return changelogSrcDirectory;
+	}
 }

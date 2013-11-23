@@ -9,80 +9,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import karstenroethig.db.core.DatabaseModel;
-import karstenroethig.db.core.dto.Database;
-import karstenroethig.db.core.locator.AbstractDatabaseLocator;
 import karstenroethig.db.core.utils.DateUtils;
 import karstenroethig.db.plugin.utils.TextUtils;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-public abstract class AbstractCreateWithVelocityMojo extends AbstractMojo {
-
-    @Parameter(
-        property = "databaseLocatorClass",
-        required = true
-    )
-    private String databaseLocatorClass;
-    
-    private Database database = null;
+public abstract class AbstractCreateWithVelocityMojo extends AbstractDatabaseMojo {
 
     private VelocityEngine velocityEngine = null;
     
     private TextUtils textUtils = new TextUtils();
-
-    public void execute() throws MojoExecutionException {
-
-        // Check class in classpath
-        Class databaseLocatorClazz;
-
-        try {
-            databaseLocatorClazz = Class.forName( databaseLocatorClass );
-        } catch( ClassNotFoundException ex ) {
-            throw new MojoExecutionException( "Class not found: " + databaseLocatorClass, ex );
-        }
-
-        // Create instance
-        Object databaseLocatorInstance;
-
-        try {
-            databaseLocatorInstance = databaseLocatorClazz.newInstance();
-        } catch( Exception ex ) {
-            throw new MojoExecutionException( "Could not create instance of class " + databaseLocatorClass, ex );
-        }
-
-        // Check instance
-        AbstractDatabaseLocator databaseLocator;
-
-        if( databaseLocatorInstance instanceof AbstractDatabaseLocator ) {
-            databaseLocator = ( AbstractDatabaseLocator )databaseLocatorInstance;
-        } else {
-            throw new MojoExecutionException( "databaseLocatorClass is no instance of " +
-                AbstractDatabaseLocator.class.getName() );
-        }
-
-        // Load database model
-        database = DatabaseModel.loadDatabaseModel( databaseLocator );
-
-        if( database == null ) {
-            throw new MojoExecutionException( "Could not load database model. Please run common test classes." );
-        }
-
-        // Create output directory
-        File outputDirectory = getOutputDirectory();
-        
-        if( outputDirectory != null && !outputDirectory.exists() ) {
-            outputDirectory.mkdirs();
-        }
-
-    }
+    
+    private StringUtils stringUtils = new StringUtils();
 
     protected void copyFile( String sourceFilename, File outputDirectory, String targetSubDirectory,
         String targetFilename ) throws IOException {
@@ -187,21 +129,16 @@ public abstract class AbstractCreateWithVelocityMojo extends AbstractMojo {
     	
     	Map<String, Object> params = new HashMap<String, Object>();
     	
-    	String createDateStr = DateUtils.formatDate( database.getCreateDate() );
+    	String createDateStr = DateUtils.formatDate( getDatabase().getCreateDate() );
     	
-    	params.put( "database", database );
+    	params.put( "database", getDatabase() );
     	params.put( "createDateStr", createDateStr );
     	params.put( "textUtils", textUtils );
+    	params.put( "stringUtils", stringUtils );
     	
     	return params;
     }
     
-    protected Database getDatabase() {
-    	return database;
-    }
-    
     protected abstract ResourceLocator getResourceLocator();
-
-    protected abstract File getOutputDirectory();
     
 }

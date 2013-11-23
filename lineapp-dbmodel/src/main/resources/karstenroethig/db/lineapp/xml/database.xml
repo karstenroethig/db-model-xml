@@ -10,6 +10,6 @@
         <entity category="Verwaltung" name="User"/>
         <entity category="Verwaltung" name="MailProperty"/>
         <entity category="Verwaltung" name="PropertyNumber"/>
-        <entity category="Test" name="Test"/>
+        <entity category="Test1" name="Test"/>
     </entities>
 </database>

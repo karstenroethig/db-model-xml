@@ -46,6 +46,10 @@ public class Entity {
 		this.description = description;
 	}
 	
+	public Map<String, String> getProperties() {
+		return properties;
+	}
+	
 	public Set<String> getPropertyKeys() {
 		return properties.keySet();
 	}

@@ -1,5 +1,10 @@
 package karstenroethig.db.plugin.utils;
 
+import java.util.List;
+
+import karstenroethig.db.core.utils.DiffMatchPatch.Diff;
+import karstenroethig.db.core.utils.DiffMatchPatch.Operation;
+
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -217,6 +222,38 @@ public class TextUtils {
     
     public String removeLineBreaks( String string ) {
     	return StringUtils.replace( string, "\n", " " );
+    }
+    
+    public static final String diffsToHtml( List<Diff> diffs, boolean old ) {
+    	
+    	StringBuffer text = new StringBuffer();
+		
+		for( Diff diff : diffs ) {
+			
+			if( diff.operation == Operation.EQUAL ) {
+				
+				text.append( plainTextToHtml( diff.text ) );
+				text.append( plainTextToHtml( diff.text ) );
+				
+			} else if( diff.operation == Operation.INSERT ) {
+				
+				if( !old ) {
+					text.append( "<span style=\"background-color: #e6ffe6;\">" );
+					text.append( plainTextToHtml( diff.text ) );
+					text.append( "</span>" );
+				}
+
+			} else if( diff.operation == Operation.DELETE ) {
+				
+				if( old ) {
+					text.append( "<span style=\"background-color: #ffe6e6;\">" );
+					text.append( plainTextToHtml( diff.text ) );
+					text.append( "</span>" );
+				}
+			}
+		}
+		
+        return text.toString();
     }
 
 }

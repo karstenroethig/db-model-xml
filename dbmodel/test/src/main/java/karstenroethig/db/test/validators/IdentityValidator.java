@@ -7,11 +7,6 @@ import karstenroethig.db.core.dto.datatypes.DatatypeEnum;
 import karstenroethig.db.test.validation.AbstractDatabaseModelValidator;
 import karstenroethig.db.test.validation.ValidationResult;
 
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.HashSet;
-import java.util.Set;
-
 
 /**
  * Prüfungen:
