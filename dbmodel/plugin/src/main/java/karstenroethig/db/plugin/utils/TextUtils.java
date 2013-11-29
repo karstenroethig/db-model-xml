@@ -233,7 +233,6 @@ public class TextUtils {
 			if( diff.operation == Operation.EQUAL ) {
 				
 				text.append( plainTextToHtml( diff.text ) );
-				text.append( plainTextToHtml( diff.text ) );
 				
 			} else if( diff.operation == Operation.INSERT ) {
 				
